@@ -1,0 +1,45 @@
+/** @type {import('tailwindcss').Config} */
+export default {
+  content: ['./index.html', './src/**/*.{js,jsx}'],
+  theme: {
+    extend: {
+      fontFamily: {
+        display: ['Space Grotesk', 'sans-serif'],
+        sans: ['Bricolage Grotesque', 'sans-serif'],
+      },
+      colors: {
+        'bg-cream':    '#F4F3EC',
+        'bg-cream-2':  '#F5F4EC',
+        'bg-cream-3':  '#F0EFE8',
+        'surface':     '#E8EDDA',
+        'surface-2':   '#E0DDD4',
+        'border-warm': '#D8D0B8',
+        'green-dark':  '#1B3C2A',
+        'green-deep':  '#1A2B1A',
+        'green-700':   '#2D4A1E',
+        'green-600':   '#5A7A3A',
+        'green-500':   '#5A7A5A',
+        'green-olive': '#7A8C6E',
+        'green-400':   '#8BAA3D',
+        'green-lime':  '#8DC63F',
+        'green-300':   '#BBCD8A',
+        'green-200':   '#C5D89A',
+        'muted':       '#8A8F84',
+        'muted-2':     '#7A7F74',
+        'orange':      '#CD7F32',
+        'orange-accent':'#E05840',
+        'gold-accent': '#F0A040',
+        'streak-1':    '#4A8A38',
+        'streak-2':    '#489838',
+      },
+      borderRadius: {
+        'sm':   '8px',
+        'md':   '12px',
+        'lg':   '20px',
+        'xl':   '28px',
+        'full': '999px',
+      },
+    },
+  },
+  plugins: [],
+}
