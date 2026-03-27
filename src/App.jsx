@@ -1,5 +1,7 @@
-import { Routes, Route } from 'react-router-dom'
+import { Routes, Route, useLocation } from 'react-router-dom'
+import { useEffect } from 'react'
 import NavBar from './components/NavBar'
+import FloatingBars from './components/FloatingBars'
 import HomePage from './pages/HomePage'
 import MenuPage from './pages/MenuPage'
 import MapsPage from './pages/MapsPage'
@@ -26,9 +28,16 @@ import LoginPage from './pages/LoginPage'
 import LoginPage2 from './pages/LoginPage2'
 import OnboardingPage from './pages/OnboardingPage'
 
+function ScrollToTop() {
+  const { pathname } = useLocation()
+  useEffect(() => { window.scrollTo(0, 0) }, [pathname])
+  return null
+}
+
 export default function App() {
   return (
     <div style={{ maxWidth: '393px', margin: '0 auto', minHeight: '100vh', backgroundColor: '#F4F3EC', position: 'relative' }}>
+      <ScrollToTop />
       <Routes>
         <Route path="/login" element={<LoginPage />} />
         <Route path="/login-2" element={<LoginPage2 />} />
@@ -56,6 +65,7 @@ export default function App() {
         <Route path="/rewards/register" element={<StreakRegisterPage />} />
         <Route path="/rewards/qrcode" element={<StreakQRCodePage />} />
       </Routes>
+      <FloatingBars />
       <NavBar />
     </div>
   )

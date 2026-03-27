@@ -1,6 +1,7 @@
 import { useNavigate } from 'react-router-dom'
 import { useStore } from '../store/useStore'
 import { proteins } from '../data/ingredients'
+import platImages from '../assets/platImages'
 
 export default function CustomBowlProteinPage() {
   const navigate = useNavigate()
@@ -8,13 +9,13 @@ export default function CustomBowlProteinPage() {
   const canContinue = selectedProteins.length >= 1
 
   return (
-    <div style={{ backgroundColor: '#F5F4EC', minHeight: '100vh', display: 'flex', flexDirection: 'column' }}>
+    <div className="page-enter" style={{ minHeight: '100vh', display: 'flex', flexDirection: 'column' }}>
       {/* Top bar */}
       <div style={{ padding: '20px 24px 0', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-        <button onClick={() => navigate('/menu')} style={{ background: 'none', border: 'none', cursor: 'pointer', padding: '4px', display: 'flex' }}>
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#1B3C2A" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polyline points="15 18 9 12 15 6" /></svg>
+        <button onClick={() => navigate('/menu')} style={{ background: 'rgba(255,255,255,0.72)', backdropFilter: 'blur(12px)', WebkitBackdropFilter: 'blur(12px)', border: '1px solid rgba(255,255,255,0.5)', borderRadius: '14px', width: '40px', height: '40px', display: 'flex', alignItems: 'center', justifyContent: 'center', boxShadow: '0 2px 12px rgba(0,0,0,0.06)', cursor: 'pointer', padding: 0 }}>
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#1B3C2A" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polyline points="15 18 9 12 15 6" /></svg>
         </button>
-        <button onClick={() => { useStore.getState().resetCustomBowl(); navigate('/menu') }} style={{ background: 'none', border: 'none', fontSize: '13px', color: '#8A8F84', cursor: 'pointer' }}>Cancel</button>
+        <button onClick={() => { useStore.getState().resetCustomBowl(); navigate('/menu') }} style={{ background: 'none', border: 'none', fontSize: '13px', color: '#B0ADA4', cursor: 'pointer' }}>Cancel</button>
       </div>
 
       {/* Progress */}
@@ -23,18 +24,18 @@ export default function CustomBowlProteinPage() {
       </div>
       <div style={{ padding: '8px 24px 0', display: 'flex', gap: '4px' }}>
         {[0, 1, 2, 3].map((i) => (
-          <div key={i} style={{ flex: 1, height: '3px', borderRadius: '999px', backgroundColor: i === 0 ? '#8BAA3D' : '#E8EDDA' }} />
+          <div key={i} style={{ flex: 1, height: '3px', borderRadius: '999px', ...(i === 0 ? { background: 'linear-gradient(90deg, #8BAA3D, #A0C044)' } : { backgroundColor: 'rgba(139,170,61,0.1)' }) }} />
         ))}
       </div>
 
       {/* Title row */}
       <div style={{ padding: '20px 24px 0', display: 'flex', justifyContent: 'space-between', alignItems: 'baseline' }}>
-        <h1 style={{ fontFamily: "'Space Grotesk', sans-serif", fontSize: '26px', fontWeight: 700, color: '#1B3C2A', margin: 0 }}>Protein</h1>
+        <h1 style={{ fontFamily: "'Space Grotesk', sans-serif", fontSize: '26px', fontWeight: 700, margin: 0, background: 'linear-gradient(135deg, #1B3C2A 0%, #2D5A3F 100%)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>Protein</h1>
         <span style={{ fontSize: '15px', fontWeight: 600, color: '#8BAA3D' }}>Choose 1-2</span>
       </div>
       <div style={{ padding: '4px 24px 0', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-        <span style={{ fontSize: '13px', color: '#5A7A5A' }}>Select your protein base</span>
-        <span style={{ fontSize: '12px', fontWeight: 600, color: '#1B3C2A', backgroundColor: '#E8EDDA', borderRadius: '999px', padding: '4px 12px' }}>CHF 6.50</span>
+        <span style={{ fontSize: '13px', color: '#7A8A6A' }}>Select your protein base</span>
+        <span style={{ fontSize: '12px', fontWeight: 600, color: '#1B3C2A', background: 'rgba(139,170,61,0.1)', border: '1px solid rgba(139,170,61,0.15)', borderRadius: '999px', padding: '4px 12px' }}>CHF 6.50</span>
       </div>
 
       {/* Ingredient grid */}
@@ -47,21 +48,23 @@ export default function CustomBowlProteinPage() {
                 onClick={() => toggleProtein(item.id)}
                 style={{
                   width: '90px', height: '90px', borderRadius: '50%', cursor: 'pointer',
-                  backgroundColor: '#D1D5DB', display: 'flex', alignItems: 'center', justifyContent: 'center',
+                  background: 'linear-gradient(135deg, #E8EDDA 0%, #D4DCBE 100%)', border: selected ? '3px solid #8BAA3D' : '1px solid rgba(139,170,61,0.1)',
+                  display: 'flex', alignItems: 'center', justifyContent: 'center',
                   fontSize: '11px', color: '#6B7280', fontWeight: 500,
-                  border: selected ? '3px solid #8BAA3D' : '3px solid transparent',
-                  boxSizing: 'border-box',
+                  boxShadow: selected ? '0 0 0 4px rgba(139,170,61,0.15)' : 'none',
+                  boxSizing: 'border-box', overflow: 'hidden', padding: 0,
                 }}
-              >Image</div>
+              >{platImages[item.id] ? <img src={platImages[item.id]} alt={item.name} style={{ width: '100%', height: '100%', objectFit: 'cover' }} /> : 'Image'}</div>
               <span style={{ fontSize: '12px', fontWeight: 600, color: '#1B3C2A', textAlign: 'center' }}>{item.name}</span>
               <span style={{ fontSize: '10px', color: '#7A7F74' }}>{item.protein}g protein</span>
               <button
                 onClick={() => toggleProtein(item.id)}
                 style={{
-                  fontSize: '10px', fontWeight: 600, border: 'none', borderRadius: '999px',
+                  fontSize: '10px', fontWeight: 600, borderRadius: '999px',
                   padding: '4px 14px', cursor: 'pointer',
-                  backgroundColor: selected ? '#8BAA3D' : '#E8EDDA',
-                  color: selected ? 'white' : '#5A7A3A',
+                  ...(selected
+                    ? { background: 'linear-gradient(135deg, #8BAA3D, #A0C044)', boxShadow: '0 2px 8px rgba(139,170,61,0.3)', color: 'white', border: 'none' }
+                    : { background: 'rgba(139,170,61,0.1)', border: '1px solid rgba(139,170,61,0.12)', color: '#5A7A3A' }),
                 }}
               >{selected ? '✓ Added' : '+ Add'}</button>
             </div>
@@ -76,8 +79,9 @@ export default function CustomBowlProteinPage() {
           disabled={!canContinue}
           style={{
             width: '100%', padding: '16px', borderRadius: '999px', border: 'none',
-            backgroundColor: canContinue ? '#1B3C2A' : '#E8EDDA',
-            color: canContinue ? 'white' : '#8A8F84',
+            ...(canContinue
+              ? { background: 'linear-gradient(135deg, #1B3C2A, #2D5A3F)', boxShadow: '0 4px 16px rgba(27,60,42,0.25)', color: 'white' }
+              : { background: 'rgba(139,170,61,0.08)', color: '#B0ADA4' }),
             fontSize: '14px', fontWeight: 600, cursor: canContinue ? 'pointer' : 'not-allowed',
             display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '8px',
           }}

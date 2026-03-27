@@ -26,26 +26,26 @@ export default function StreakQRCodePage() {
   const navigate = useNavigate()
 
   return (
-    <div style={{ backgroundColor: '#F4F3EC', minHeight: '100vh', display: 'flex', flexDirection: 'column' }}>
+    <div className="page-enter" style={{ minHeight: '100vh', display: 'flex', flexDirection: 'column' }}>
       {/* Header */}
       <div style={{ padding: '20px 24px 0' }}>
-        <button onClick={() => navigate('/rewards')} style={{ background: 'none', border: 'none', cursor: 'pointer', padding: '4px', display: 'flex' }}>
+        <button onClick={() => navigate('/rewards')} style={{ width: '40px', height: '40px', borderRadius: '50%', background: 'rgba(255,255,255,0.6)', backdropFilter: 'blur(12px)', border: '1px solid rgba(255,255,255,0.5)', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#1B3C2A" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polyline points="15 18 9 12 15 6" /></svg>
         </button>
       </div>
 
       <div style={{ flex: 1, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', padding: '0 24px 40px' }}>
-        <h1 style={{ fontFamily: "'Space Grotesk', sans-serif", fontSize: '22px', fontWeight: 700, color: '#1B3C2A', marginBottom: '8px', textAlign: 'center' }}>
+        <h1 style={{ fontFamily: "'Space Grotesk', sans-serif", fontSize: '22px', fontWeight: 700, background: 'linear-gradient(135deg, #1B3C2A, #8BAA3D)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', marginBottom: '8px', textAlign: 'center' }}>
           Your QR Code
         </h1>
-        <p style={{ fontSize: '14px', color: '#7A7F74', textAlign: 'center', marginBottom: '32px' }}>
+        <p style={{ fontSize: '14px', color: '#7A8A6A', textAlign: 'center', marginBottom: '32px' }}>
           Show this at the counter to earn points
         </p>
 
         {/* QR Code */}
         <div style={{
-          backgroundColor: 'white', borderRadius: '20px', padding: '24px',
-          boxShadow: '0 2px 12px rgba(0,0,0,0.06)', marginBottom: '32px',
+          background: 'rgba(255,255,255,0.72)', backdropFilter: 'blur(16px)', border: '1px solid rgba(255,255,255,0.5)', borderRadius: '20px', padding: '24px',
+          boxShadow: '0 4px 24px rgba(0,0,0,0.06)', marginBottom: '32px',
         }}>
           <div style={{
             display: 'grid',
@@ -61,12 +61,12 @@ export default function StreakQRCodePage() {
           </div>
         </div>
 
-        <p style={{ fontSize: '12px', color: '#8A8F84', textAlign: 'center', marginBottom: '24px' }}>
+        <p style={{ fontSize: '12px', color: '#B0ADA4', textAlign: 'center', marginBottom: '24px' }}>
           Scan once per order to add points
         </p>
 
         <button onClick={() => navigate('/rewards')} style={{
-          backgroundColor: '#1B3C2A', color: 'white', border: 'none',
+          background: 'linear-gradient(135deg, #1B3C2A, #2D5A3F)', boxShadow: '0 4px 16px rgba(27,60,42,0.25)', color: 'white', border: 'none',
           borderRadius: '999px', padding: '14px 40px', fontSize: '14px', fontWeight: 600, cursor: 'pointer',
         }}>Done</button>
       </div>

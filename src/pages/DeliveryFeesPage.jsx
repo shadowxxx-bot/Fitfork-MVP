@@ -30,15 +30,15 @@ export default function DeliveryFeesPage() {
   const navigate = useNavigate()
 
   return (
-    <div style={{ backgroundColor: '#F4F3EC', minHeight: '100vh', paddingBottom: '80px' }}>
+    <div className="page-enter" style={{ minHeight: '100vh', paddingBottom: '80px' }}>
       {/* Title bar above map */}
       <div style={{ padding: '20px 24px 16px', display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-          <button onClick={() => navigate('/maps')} style={{ background: 'none', border: 'none', cursor: 'pointer', padding: '4px', display: 'flex' }}>
+          <button onClick={() => navigate('/maps')} style={{ width: '40px', height: '40px', borderRadius: '50%', background: 'rgba(255,255,255,0.6)', backdropFilter: 'blur(12px)', border: '1px solid rgba(255,255,255,0.5)', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#1B3C2A" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polyline points="15 18 9 12 15 6" /></svg>
           </button>
           <div>
-            <h1 style={{ fontFamily: "'Space Grotesk', sans-serif", fontSize: '22px', fontWeight: 700, color: '#1B3C2A', margin: 0 }}>Delivery</h1>
+            <h1 style={{ fontFamily: "'Space Grotesk', sans-serif", fontSize: '22px', fontWeight: 700, background: 'linear-gradient(135deg, #1B3C2A, #8BAA3D)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', margin: 0 }}>Delivery</h1>
             <p style={{ fontSize: '12px', color: '#5A7A5A', margin: 0 }}>Zone & fees</p>
           </div>
         </div>
@@ -50,7 +50,7 @@ export default function DeliveryFeesPage() {
       </div>
 
       {/* Real map with delivery zone circles */}
-      <div style={{ height: '240px', overflow: 'hidden' }}>
+      <div style={{ height: '240px', borderRadius: '24px', overflow: 'hidden', margin: '0 16px', boxShadow: '0 4px 24px rgba(0,0,0,0.08)' }}>
         <MapContainer
           center={[FITFORK_LAT, FITFORK_LNG]}
           zoom={13}
@@ -96,18 +96,20 @@ export default function DeliveryFeesPage() {
       <div style={{ padding: '16px 24px 0' }}>
         {deliveryOptions.map((opt, i) => (
           <div key={i} style={{
-            backgroundColor: 'white', borderRadius: '16px', padding: '16px',
+            background: 'rgba(255,255,255,0.72)', backdropFilter: 'blur(16px)', border: '1px solid rgba(255,255,255,0.5)', boxShadow: '0 4px 24px rgba(0,0,0,0.04)', borderRadius: '20px', padding: '16px',
             marginBottom: '10px', display: 'flex', alignItems: 'center', gap: '12px',
+            animation: `rewardFadeIn 0.4s ease-out ${i * 0.08}s both`,
           }}>
+            <style>{`@keyframes rewardFadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }`}</style>
             {/* Price circle */}
             <div style={{
               width: '44px', height: '44px', borderRadius: '50%',
-              border: '2px solid #E8EDDA', backgroundColor: 'white',
+              border: '1.5px solid rgba(139,170,61,0.15)', backgroundColor: 'white',
               display: 'flex', alignItems: 'center', justifyContent: 'center',
               flexShrink: 0,
             }}>
               {opt.price ? (
-                <span style={{ fontSize: '12px', fontWeight: 700, color: '#8A8F84' }}>{opt.price}</span>
+                <span style={{ fontSize: '12px', fontWeight: 700, color: '#7A8A6A' }}>{opt.price}</span>
               ) : (
                 <span style={{ fontSize: '12px', fontWeight: 700, color: '#5A7A3A' }}>0.-</span>
               )}
@@ -115,13 +117,13 @@ export default function DeliveryFeesPage() {
 
             <div style={{ flex: 1, minWidth: 0 }}>
               <span style={{ fontSize: '14px', fontWeight: 600, color: '#1B3C2A', display: 'block' }}>{opt.label}</span>
-              <span style={{ fontSize: '11px', color: '#7A7F74', display: 'block' }}>{opt.sub}</span>
+              <span style={{ fontSize: '11px', color: '#7A8A6A', display: 'block' }}>{opt.sub}</span>
               <span style={{ fontSize: '11px', color: '#5A7A5A' }}>{opt.detail}</span>
             </div>
 
             <span style={{
               fontSize: '11px', fontWeight: 700, color: 'white',
-              backgroundColor: opt.badgeColor, borderRadius: '6px',
+              background: opt.badgeColor === '#A0C044' ? 'linear-gradient(135deg, #8BAA3D, #A0C044)' : opt.badgeColor, borderRadius: '6px',
               padding: '4px 10px', flexShrink: 0,
             }}>{opt.badge}</span>
           </div>
@@ -130,11 +132,11 @@ export default function DeliveryFeesPage() {
 
       {/* Estimated delivery time */}
       <div style={{ padding: '16px 24px 0' }}>
-        <p style={{ fontSize: '12px', color: '#8A8F84', margin: '0 0 10px' }}>Estimated delivery time</p>
+        <p style={{ fontSize: '12px', color: '#B0ADA4', margin: '0 0 10px', textTransform: 'uppercase', letterSpacing: '0.5px' }}>Estimated delivery time</p>
         <div style={{ display: 'flex', gap: '10px' }}>
           {timeOptions.map((t) => (
             <div key={t.value} style={{
-              flex: 1, backgroundColor: 'white', borderRadius: '16px',
+              flex: 1, background: 'rgba(255,255,255,0.72)', backdropFilter: 'blur(16px)', border: '1px solid rgba(255,255,255,0.5)', boxShadow: '0 4px 24px rgba(0,0,0,0.04)', borderRadius: '20px',
               padding: '14px 8px', textAlign: 'center',
             }}>
               <span style={{ fontSize: '24px', fontWeight: 700, color: '#1B3C2A', display: 'block' }}>{t.value}</span>
@@ -147,8 +149,8 @@ export default function DeliveryFeesPage() {
 
       {/* Delivery condition */}
       <div style={{ padding: '16px 24px 0' }}>
-        <p style={{ fontSize: '12px', color: '#8A8F84', margin: '0 0 10px' }}>Delivery condition</p>
-        <div style={{ backgroundColor: 'white', borderRadius: '16px', padding: '14px 16px', display: 'flex', alignItems: 'center', gap: '10px' }}>
+        <p style={{ fontSize: '12px', color: '#B0ADA4', margin: '0 0 10px', textTransform: 'uppercase', letterSpacing: '0.5px' }}>Delivery condition</p>
+        <div style={{ background: 'rgba(255,255,255,0.72)', backdropFilter: 'blur(16px)', border: '1px solid rgba(255,255,255,0.5)', boxShadow: '0 4px 24px rgba(0,0,0,0.04)', borderRadius: '20px', padding: '14px 16px', display: 'flex', alignItems: 'center', gap: '10px' }}>
           <span style={{ fontSize: '14px' }}>💳</span>
           <span style={{ fontSize: '13px', color: '#1B3C2A', fontWeight: 500 }}>Pay in advance via app</span>
         </div>
@@ -158,7 +160,7 @@ export default function DeliveryFeesPage() {
       <div style={{ padding: '20px 24px 0' }}>
         <button onClick={() => navigate('/menu')} style={{
           width: '100%', padding: '16px', borderRadius: '999px', border: 'none',
-          backgroundColor: '#8BAA3D', color: 'white',
+          background: 'linear-gradient(135deg, #8BAA3D, #A0C044)', boxShadow: '0 4px 16px rgba(139,170,61,0.3)', color: 'white',
           fontSize: '14px', fontWeight: 600, cursor: 'pointer',
         }}>Order Now</button>
       </div>

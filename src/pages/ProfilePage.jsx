@@ -30,15 +30,15 @@ export default function ProfilePage() {
 
   if (!isLoggedIn) {
     return (
-      <div style={{ backgroundColor: '#F4F3EC', minHeight: '100vh', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', padding: '0 24px', paddingBottom: '80px' }}>
-        <div style={{ width: '80px', height: '80px', borderRadius: '50%', backgroundColor: '#E8EDDA', display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: '20px' }}>
+      <div className="page-enter" style={{ minHeight: '100vh', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', padding: '0 24px', paddingBottom: '80px' }}>
+        <div style={{ width: '80px', height: '80px', borderRadius: '50%', background: 'rgba(139,170,61,0.1)', border: '1px solid rgba(139,170,61,0.15)', display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: '20px' }}>
           <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#8BAA3D" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2" /><circle cx="12" cy="7" r="4" /></svg>
         </div>
         <h2 style={{ fontFamily: "'Space Grotesk', sans-serif", fontSize: '20px', fontWeight: 700, color: '#1B3C2A', margin: '0 0 8px', textAlign: 'center' }}>Sign in to view your profile</h2>
         <p style={{ fontSize: '13px', color: '#8A8F84', margin: '0 0 24px', textAlign: 'center' }}>Track your nutrition, manage preferences and more</p>
         <button onClick={() => navigate('/login')} style={{
           padding: '14px 40px', borderRadius: '999px', border: 'none',
-          backgroundColor: '#8BAA3D', color: 'white', fontSize: '14px', fontWeight: 600, cursor: 'pointer',
+          background: 'linear-gradient(135deg, #8BAA3D, #A0C044)', boxShadow: '0 4px 16px rgba(139,170,61,0.3)', color: 'white', fontSize: '14px', fontWeight: 600, cursor: 'pointer',
           fontFamily: "'Space Grotesk', sans-serif",
         }}>Sign in or create account</button>
       </div>
@@ -60,12 +60,12 @@ export default function ProfilePage() {
 
   const rowStyle = (last) => ({
     display: 'flex', alignItems: 'center', gap: '14px',
-    padding: '14px 0', borderBottom: last ? 'none' : '1px solid #EEF2E6', cursor: 'pointer',
+    padding: '14px 0', borderBottom: last ? 'none' : '1px solid rgba(139,170,61,0.1)', cursor: 'pointer',
   })
 
   const iconCircle = (children) => (
     <div style={{
-      width: '40px', height: '40px', borderRadius: '50%', backgroundColor: '#EEF2E6',
+      width: '40px', height: '40px', borderRadius: '14px', background: 'rgba(139,170,61,0.1)', border: '1px solid rgba(139,170,61,0.12)',
       display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0,
     }}>{children}</div>
   )
@@ -75,21 +75,21 @@ export default function ProfilePage() {
   )
 
   return (
-    <div style={{ backgroundColor: '#F4F3EC', minHeight: '100vh', paddingBottom: '80px' }}>
+    <div className="page-enter" style={{ minHeight: '100vh', paddingBottom: '80px' }}>
       {/* Top section */}
       <div style={{ padding: '48px 24px 0' }}>
         <div style={{ display: 'flex', justifyContent: 'flex-end', marginBottom: '16px' }}>
           <button onClick={() => navigate('/profile/edit')} style={{
-            backgroundColor: '#1B3C2A', color: 'white', border: 'none',
-            borderRadius: '999px', padding: '10px 24px', fontSize: '14px', fontWeight: 600, cursor: 'pointer',
+            background: 'linear-gradient(135deg, #1B3C2A, #2D5A3F)', boxShadow: '0 2px 8px rgba(27,60,42,0.2)', color: 'white', border: 'none',
+            borderRadius: '14px', padding: '10px 24px', fontSize: '14px', fontWeight: 600, cursor: 'pointer',
           }}>Edit</button>
         </div>
         <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', marginBottom: '32px' }}>
           <div style={{ position: 'relative' }}>
-            <div style={{ width: '100px', height: '100px', borderRadius: '50%', backgroundColor: '#E8EDDA', border: '2px solid #8BAA3D' }} />
+            <div style={{ width: '100px', height: '100px', borderRadius: '50%', background: 'linear-gradient(135deg, rgba(139,170,61,0.12) 0%, rgba(139,170,61,0.06) 100%)', border: '2px solid rgba(139,170,61,0.3)' }} />
             <div style={{
               position: 'absolute', bottom: '0', right: '0',
-              width: '30px', height: '30px', borderRadius: '50%', backgroundColor: '#1B3C2A',
+              width: '30px', height: '30px', borderRadius: '50%', background: 'linear-gradient(135deg, #1B3C2A, #2D5A3F)',
               display: 'flex', alignItems: 'center', justifyContent: 'center',
             }}>
               <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -103,8 +103,8 @@ export default function ProfilePage() {
 
       {/* PERSONAL INFORMATION */}
       <div style={{ padding: '0 24px', marginBottom: '16px' }}>
-        <div style={{ backgroundColor: 'white', borderRadius: '20px', padding: '16px 18px' }}>
-          <p style={{ fontSize: '11px', fontWeight: 700, color: '#8A8F84', textTransform: 'uppercase', letterSpacing: '1px', margin: '0 0 8px' }}>Personal information</p>
+        <div style={{ background: 'rgba(255,255,255,0.72)', backdropFilter: 'blur(16px)', WebkitBackdropFilter: 'blur(16px)', border: '1px solid rgba(255,255,255,0.5)', boxShadow: '0 4px 24px rgba(0,0,0,0.04), 0 1px 2px rgba(0,0,0,0.02)', borderRadius: '20px', padding: '16px 18px' }}>
+          <p style={{ fontSize: '11px', fontWeight: 700, color: '#B0ADA4', textTransform: 'uppercase', letterSpacing: '1px', margin: '0 0 8px' }}>Personal information</p>
 
           {[
             {
@@ -132,7 +132,7 @@ export default function ProfilePage() {
               {iconCircle(item.icon)}
               <div style={{ flex: 1, minWidth: 0 }}>
                 <span style={{ fontSize: '14px', fontWeight: 600, color: '#1B3C2A', display: 'block' }}>{item.label}</span>
-                <span style={{ fontSize: '12px', color: '#8A8F84', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap', display: 'block' }}>{item.value}</span>
+                <span style={{ fontSize: '12px', color: '#7A8A6A', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap', display: 'block' }}>{item.value}</span>
               </div>
               {chevron}
             </div>
@@ -142,8 +142,8 @@ export default function ProfilePage() {
 
       {/* NUTRITION GOALS */}
       <div style={{ padding: '0 24px', marginBottom: '16px' }}>
-        <div style={{ backgroundColor: 'white', borderRadius: '20px', padding: '16px 18px' }}>
-          <p style={{ fontSize: '11px', fontWeight: 700, color: '#8A8F84', textTransform: 'uppercase', letterSpacing: '1px', margin: '0 0 12px' }}>Nutrition goals per day</p>
+        <div style={{ background: 'rgba(255,255,255,0.72)', backdropFilter: 'blur(16px)', WebkitBackdropFilter: 'blur(16px)', border: '1px solid rgba(255,255,255,0.5)', boxShadow: '0 4px 24px rgba(0,0,0,0.04), 0 1px 2px rgba(0,0,0,0.02)', borderRadius: '20px', padding: '16px 18px' }}>
+          <p style={{ fontSize: '11px', fontWeight: 700, color: '#B0ADA4', textTransform: 'uppercase', letterSpacing: '1px', margin: '0 0 12px' }}>Nutrition goals per day</p>
 
           <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '10px', marginBottom: '14px' }}>
             {[
@@ -151,10 +151,14 @@ export default function ProfilePage() {
               { label: 'Protein', value: computed.protein, unit: 'g' },
               { label: 'Carbs', value: computed.carbs, unit: 'g' },
               { label: 'Fats', value: computed.fats, unit: 'g' },
-            ].map((n) => (
-              <div key={n.label} style={{ backgroundColor: '#F4F3EC', borderRadius: '12px', padding: '12px 14px' }}>
+            ].map((n, i) => (
+              <div key={n.label} style={{ background: 'rgba(139,170,61,0.06)', border: '1px solid rgba(139,170,61,0.1)', borderRadius: '16px', padding: '12px 14px' }}>
                 <span style={{ fontSize: '11px', color: '#8A8F84', display: 'block', marginBottom: '4px' }}>{n.label}</span>
-                <span style={{ fontSize: '14px', fontWeight: 600, color: '#5A7A5A' }}>{n.value} {n.unit}</span>
+                {i === 0 ? (
+                  <span style={{ fontSize: '14px', fontWeight: 600, background: 'linear-gradient(135deg, #8BAA3D, #A0C044)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>{n.value} {n.unit}</span>
+                ) : (
+                  <span style={{ fontSize: '14px', fontWeight: 600, color: '#5A7A5A' }}>{n.value} {n.unit}</span>
+                )}
               </div>
             ))}
           </div>
@@ -163,7 +167,7 @@ export default function ProfilePage() {
             Auto-calculated from your profile
           </div>
 
-          <div style={{ height: '1px', backgroundColor: '#E5E3D8', margin: '4px 0' }} />
+          <div style={{ height: '1px', backgroundColor: 'rgba(139,170,61,0.1)', margin: '4px 0' }} />
 
           {/* Goal & Activity dropdowns */}
           {[
@@ -195,18 +199,18 @@ export default function ProfilePage() {
                   </svg>
                 </div>
                 {isOpen && (
-                  <div style={{ backgroundColor: 'white', borderRadius: '14px', border: '1.5px solid #8BAA3D', overflow: 'hidden', marginBottom: '8px' }}>
+                  <div style={{ backgroundColor: 'white', borderRadius: '14px', border: '1.5px solid rgba(139,170,61,0.4)', overflow: 'hidden', marginBottom: '8px' }}>
                     {dd.options.map((opt) => {
                       const selected = dd.value === opt
                       return (
                         <div key={opt} onClick={() => handleDropdownChange(dd.key, opt)} style={{
                           display: 'flex', alignItems: 'center', justifyContent: 'space-between',
-                          padding: '14px 16px', cursor: 'pointer', borderBottom: '1px solid #E8EDDA',
-                          backgroundColor: selected ? '#F0F5E6' : 'white',
+                          padding: '14px 16px', cursor: 'pointer', borderBottom: '1px solid rgba(139,170,61,0.1)',
+                          backgroundColor: selected ? 'rgba(139,170,61,0.08)' : 'white',
                         }}>
                           <span style={{ fontSize: '14px', fontWeight: selected ? 600 : 400, color: selected ? '#1B3C2A' : '#5A7A5A' }}>{opt}</span>
                           {selected && (
-                            <div style={{ width: '22px', height: '22px', borderRadius: '50%', backgroundColor: '#8BAA3D', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                            <div style={{ width: '22px', height: '22px', borderRadius: '50%', background: 'linear-gradient(135deg, #8BAA3D, #A0C044)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                               <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"><polyline points="20 6 9 17 4 12" /></svg>
                             </div>
                           )}
@@ -223,8 +227,8 @@ export default function ProfilePage() {
 
       {/* SETTINGS */}
       <div style={{ padding: '0 24px', marginBottom: '16px' }}>
-        <div style={{ backgroundColor: 'white', borderRadius: '20px', padding: '16px 18px' }}>
-          <p style={{ fontSize: '11px', fontWeight: 700, color: '#8A8F84', textTransform: 'uppercase', letterSpacing: '1px', margin: '0 0 8px' }}>Settings</p>
+        <div style={{ background: 'rgba(255,255,255,0.72)', backdropFilter: 'blur(16px)', WebkitBackdropFilter: 'blur(16px)', border: '1px solid rgba(255,255,255,0.5)', boxShadow: '0 4px 24px rgba(0,0,0,0.04), 0 1px 2px rgba(0,0,0,0.02)', borderRadius: '20px', padding: '16px 18px' }}>
+          <p style={{ fontSize: '11px', fontWeight: 700, color: '#B0ADA4', textTransform: 'uppercase', letterSpacing: '1px', margin: '0 0 8px' }}>Settings</p>
           {[
             {
               label: 'Preferences', sub: null, route: '/profile/preferences',
@@ -243,7 +247,7 @@ export default function ProfilePage() {
               {iconCircle(item.icon)}
               <div style={{ flex: 1 }}>
                 <span style={{ fontSize: '14px', fontWeight: 600, color: '#1B3C2A', display: 'block' }}>{item.label}</span>
-                {item.sub && <span style={{ fontSize: '12px', color: '#8A8F84' }}>{item.sub}</span>}
+                {item.sub && <span style={{ fontSize: '12px', color: '#7A8A6A' }}>{item.sub}</span>}
               </div>
               {chevron}
             </div>
@@ -254,11 +258,11 @@ export default function ProfilePage() {
       {/* Sign out */}
       <div style={{ padding: '0 24px' }}>
         <button onClick={handleLogout} style={{
-          width: '100%', backgroundColor: 'white', borderRadius: '20px',
-          padding: '16px 18px', border: 'none', cursor: 'pointer',
+          width: '100%', background: 'rgba(255,255,255,0.72)', backdropFilter: 'blur(16px)', WebkitBackdropFilter: 'blur(16px)', border: '1px solid rgba(255,255,255,0.5)', boxShadow: '0 4px 24px rgba(0,0,0,0.04), 0 1px 2px rgba(0,0,0,0.02)', borderRadius: '20px',
+          padding: '16px 18px', cursor: 'pointer',
           display: 'flex', alignItems: 'center', gap: '14px',
         }}>
-          <div style={{ width: '40px', height: '40px', borderRadius: '50%', backgroundColor: '#FDF2F2', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
+          <div style={{ width: '40px', height: '40px', borderRadius: '14px', background: 'rgba(192,64,64,0.08)', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#C04040" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
               <path d="M9 21H5a2 2 0 01-2-2V5a2 2 0 012-2h4" /><polyline points="16 17 21 12 16 7" /><line x1="21" y1="12" x2="9" y2="12" />
             </svg>

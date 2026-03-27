@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useStore } from '../store/useStore'
+import logoPng from '../assets/logo.png'
 
 const activityOptions = [
   { label: 'Sedentary', sub: 'Little or no exercise', factor: 1.2 },
@@ -59,7 +60,7 @@ export default function OnboardingPage() {
       carbs: String(plan.carbs), fats: String(plan.fats),
       goal, activity, weight: String(weight), height: String(height), age: form.age, gender: form.gender,
     })
-    navigate('/')
+    navigate('/rewards')
   }
 
   const progress = ((step) / (totalSteps - 1)) * 100
@@ -80,32 +81,31 @@ export default function OnboardingPage() {
   }
 
   const fieldStyle = (key) => ({
-    width: '100%', backgroundColor: 'white',
-    border: focusedInput === key ? '2px solid #8BAA3D' : '1.5px solid #D4D1C8',
-    borderRadius: '12px', padding: '16px', fontSize: '15px', color: '#1B3C2A',
+    width: '100%', background: 'rgba(255,255,255,0.72)', backdropFilter: 'blur(12px)', WebkitBackdropFilter: 'blur(12px)',
+    border: focusedInput === key ? '1.5px solid rgba(139,170,61,0.5)' : '1px solid rgba(255,255,255,0.5)',
+    borderRadius: '16px', padding: '16px', fontSize: '15px', color: '#1B3C2A',
     outline: 'none', boxSizing: 'border-box', fontFamily: "'Bricolage Grotesque', sans-serif",
     transition: 'border-color 0.2s',
+    boxShadow: focusedInput === key ? '0 0 0 3px rgba(139,170,61,0.1)' : '0 2px 8px rgba(0,0,0,0.03)',
   })
 
   const renderStep = () => {
     // Step 0: Welcome
     if (step === 0) return (
-      <div style={{ flex: 1, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', padding: '0 24px', textAlign: 'center' }}>
+      <div style={{ flex: 1, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', padding: '40px 24px 0', textAlign: 'center' }}>
         <div style={{
           width: '160px', height: '160px', borderRadius: '50%',
           background: 'linear-gradient(135deg, #E8EDDA 0%, #D4E8B0 100%)',
           display: 'flex', alignItems: 'center', justifyContent: 'center',
           marginBottom: '32px', position: 'relative',
+          boxShadow: '0 8px 32px rgba(139,170,61,0.15)', animation: 'float 4s ease-in-out infinite',
         }}>
-          <span style={{ fontSize: '60px' }}>🥗</span>
-          <span style={{ position: 'absolute', top: '10px', right: '5px', fontSize: '24px' }}>🥑</span>
-          <span style={{ position: 'absolute', bottom: '10px', left: '5px', fontSize: '20px' }}>🍇</span>
-          <span style={{ position: 'absolute', top: '5px', left: '15px', fontSize: '18px' }}>🫐</span>
+          <img src={logoPng} alt="FitFork" style={{ width: '90px', height: '90px', objectFit: 'contain' }} />
         </div>
         <h1 style={{ fontFamily: "'Space Grotesk', sans-serif", fontSize: '28px', fontWeight: 700, color: '#1B3C2A', margin: '0 0 12px' }}>
-          Bienvenue chez<br /><span style={{ color: '#8BAA3D' }}>FitFork</span>
+          Bienvenue chez<br /><span style={{ background: 'linear-gradient(135deg, #8BAA3D, #A0C044)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>FitFork</span>
         </h1>
-        <p style={{ fontSize: '14px', color: '#8A8F84', lineHeight: 1.5, maxWidth: '280px' }}>
+        <p style={{ fontSize: '14px', color: '#7A8A6A', lineHeight: 1.5, maxWidth: '280px' }}>
           Let's set up your profile to personalize your experience
         </p>
       </div>
@@ -114,33 +114,33 @@ export default function OnboardingPage() {
     // Step 1: Tell us about you
     if (step === 1) return (
       <div style={{ padding: '0 24px' }}>
-        <h2 style={{ fontFamily: "'Space Grotesk', sans-serif", fontSize: '22px', fontWeight: 700, color: '#1B3C2A', margin: '0 0 6px' }}>Tell us about you</h2>
-        <p style={{ fontSize: '13px', color: '#8A8F84', margin: '0 0 24px' }}>We'll use this to personalize your experience</p>
+        <h2 style={{ fontFamily: "'Space Grotesk', sans-serif", fontSize: '22px', fontWeight: 700, color: '#1B3C2A', margin: '0 0 6px', background: 'linear-gradient(135deg, #1B3C2A 0%, #2D5A3F 100%)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>Tell us about you</h2>
+        <p style={{ fontSize: '13px', color: '#7A8A6A', margin: '0 0 24px' }}>We'll use this to personalize your experience</p>
 
-        <label style={{ fontSize: '12px', color: '#8A8F84', fontWeight: 500, display: 'block', marginBottom: '6px' }}>First name</label>
+        <label style={{ fontSize: '12px', color: '#7A8A6A', fontWeight: 600, display: 'block', marginBottom: '6px' }}>First name</label>
         <input value={form.firstName} onChange={(e) => setForm({ ...form, firstName: e.target.value })}
           onFocus={() => setFocusedInput('firstName')} onBlur={() => setFocusedInput(null)}
           placeholder="First name" style={fieldStyle('firstName')} autoFocus />
 
-        <label style={{ fontSize: '12px', color: '#8A8F84', fontWeight: 500, display: 'block', marginBottom: '6px', marginTop: '14px' }}>Last name</label>
+        <label style={{ fontSize: '12px', color: '#7A8A6A', fontWeight: 600, display: 'block', marginBottom: '6px', marginTop: '14px' }}>Last name</label>
         <input value={form.lastName} onChange={(e) => setForm({ ...form, lastName: e.target.value })}
           onFocus={() => setFocusedInput('lastName')} onBlur={() => setFocusedInput(null)}
           placeholder="Last name" style={fieldStyle('lastName')} />
 
-        <label style={{ fontSize: '12px', color: '#8A8F84', fontWeight: 500, display: 'block', marginBottom: '6px', marginTop: '14px' }}>Age</label>
+        <label style={{ fontSize: '12px', color: '#7A8A6A', fontWeight: 600, display: 'block', marginBottom: '6px', marginTop: '14px' }}>Age</label>
         <input type="number" value={form.age} onChange={(e) => setForm({ ...form, age: e.target.value })}
           onFocus={() => setFocusedInput('age')} onBlur={() => setFocusedInput(null)}
           placeholder="25" style={fieldStyle('age')} />
 
-        <label style={{ fontSize: '12px', color: '#8A8F84', fontWeight: 500, display: 'block', marginBottom: '8px', marginTop: '14px' }}>Gender</label>
+        <label style={{ fontSize: '12px', color: '#7A8A6A', fontWeight: 600, display: 'block', marginBottom: '8px', marginTop: '14px' }}>Gender</label>
         <div style={{ display: 'flex', gap: '10px' }}>
           {['Male', 'Female', 'Other'].map((g) => {
             const sel = form.gender === g
             return (
               <button key={g} onClick={() => setForm({ ...form, gender: g })} style={{
-                flex: 1, padding: '12px 0', borderRadius: '12px', cursor: 'pointer',
-                border: sel ? '2px solid #8BAA3D' : '1.5px solid #D4D1C8',
-                backgroundColor: sel ? '#F0F5E6' : 'white',
+                flex: 1, padding: '12px 0', borderRadius: '14px', cursor: 'pointer',
+                border: sel ? '1.5px solid rgba(139,170,61,0.5)' : '1px solid rgba(255,255,255,0.5)',
+                background: sel ? 'rgba(139,170,61,0.1)' : 'rgba(255,255,255,0.6)',
                 fontSize: '14px', fontWeight: sel ? 600 : 400,
                 color: sel ? '#1B3C2A' : '#8A8F84',
                 fontFamily: "'Bricolage Grotesque', sans-serif",
@@ -156,34 +156,34 @@ export default function OnboardingPage() {
     if (step === 2) {
       const sliderThumbStyle = `
         input[type=range].metric-slider { -webkit-appearance: none; appearance: none; width: 100%; height: 6px; border-radius: 3px; outline: none; }
-        input[type=range].metric-slider::-webkit-slider-track { height: 6px; border-radius: 3px; background: #E8EDDA; }
-        input[type=range].metric-slider::-webkit-slider-thumb { -webkit-appearance: none; appearance: none; width: 24px; height: 24px; border-radius: 50%; background: #8BAA3D; border: 3px solid white; box-shadow: 0 2px 6px rgba(0,0,0,0.15); cursor: pointer; margin-top: -9px; }
-        input[type=range].metric-slider::-moz-range-track { height: 6px; border-radius: 3px; background: #E8EDDA; border: none; }
-        input[type=range].metric-slider::-moz-range-thumb { width: 24px; height: 24px; border-radius: 50%; background: #8BAA3D; border: 3px solid white; box-shadow: 0 2px 6px rgba(0,0,0,0.15); cursor: pointer; }
+        input[type=range].metric-slider::-webkit-slider-track { height: 6px; border-radius: 3px; background: rgba(139,170,61,0.1); }
+        input[type=range].metric-slider::-webkit-slider-thumb { -webkit-appearance: none; appearance: none; width: 24px; height: 24px; border-radius: 50%; background: linear-gradient(135deg, #8BAA3D, #A0C044); border: 3px solid white; box-shadow: 0 2px 8px rgba(139,170,61,0.3); cursor: pointer; margin-top: -9px; }
+        input[type=range].metric-slider::-moz-range-track { height: 6px; border-radius: 3px; background: rgba(139,170,61,0.1); border: none; }
+        input[type=range].metric-slider::-moz-range-thumb { width: 24px; height: 24px; border-radius: 50%; background: linear-gradient(135deg, #8BAA3D, #A0C044); border: 3px solid white; box-shadow: 0 2px 8px rgba(139,170,61,0.3); cursor: pointer; }
         input[type=range].metric-slider::-moz-range-progress { background: #8BAA3D; height: 6px; border-radius: 3px; }
       `
       const btnStyle = {
-        width: '40px', height: '40px', borderRadius: '12px', border: 'none', cursor: 'pointer',
+        width: '40px', height: '40px', borderRadius: '14px', border: 'none', cursor: 'pointer',
         display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '20px', fontWeight: 700,
       }
       return (
         <div style={{ padding: '0 24px' }}>
           <style>{sliderThumbStyle}</style>
-          <h2 style={{ fontFamily: "'Space Grotesk', sans-serif", fontSize: '22px', fontWeight: 700, color: '#1B3C2A', margin: '0 0 6px' }}>Your body metrics</h2>
-          <p style={{ fontSize: '13px', color: '#8A8F84', margin: '0 0 28px' }}>This helps us calculate your daily needs</p>
+          <h2 style={{ fontFamily: "'Space Grotesk', sans-serif", fontSize: '22px', fontWeight: 700, color: '#1B3C2A', margin: '0 0 6px', background: 'linear-gradient(135deg, #1B3C2A 0%, #2D5A3F 100%)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>Your body metrics</h2>
+          <p style={{ fontSize: '13px', color: '#7A8A6A', margin: '0 0 28px' }}>This helps us calculate your daily needs</p>
 
           {/* Weight */}
-          <label style={{ fontSize: '12px', color: '#8A8F84', fontWeight: 500, display: 'block', marginBottom: '8px' }}>Weight</label>
+          <label style={{ fontSize: '12px', color: '#7A8A6A', fontWeight: 600, display: 'block', marginBottom: '8px' }}>Weight</label>
           <div style={{
-            backgroundColor: 'white', borderRadius: '16px', border: '1.5px solid #E8EDDA',
-            padding: '18px 20px', marginBottom: '20px',
+            background: 'rgba(255,255,255,0.72)', backdropFilter: 'blur(12px)', WebkitBackdropFilter: 'blur(12px)', borderRadius: '20px', border: '1px solid rgba(255,255,255,0.5)',
+            padding: '18px 20px', marginBottom: '20px', boxShadow: '0 2px 12px rgba(0,0,0,0.04)',
           }}>
             <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '12px', marginBottom: '16px' }}>
               <span style={{ fontSize: '42px', fontWeight: 700, color: '#1B3C2A', fontFamily: "'Space Grotesk', sans-serif", lineHeight: 1 }}>{weight}</span>
-              <span style={{ fontSize: '18px', fontWeight: 600, color: '#8A8F84', alignSelf: 'flex-end', paddingBottom: '4px' }}>kg</span>
+              <span style={{ fontSize: '18px', fontWeight: 600, color: '#B0ADA4', alignSelf: 'flex-end', paddingBottom: '4px' }}>kg</span>
               <div style={{ display: 'flex', gap: '8px', marginLeft: '8px' }}>
-                <button onClick={() => setWeight(Math.max(20, weight - 0.5))} style={{ ...btnStyle, backgroundColor: '#E8EDDA', color: '#1B3C2A' }}>−</button>
-                <button onClick={() => setWeight(Math.min(200, weight + 0.5))} style={{ ...btnStyle, backgroundColor: '#1B3C2A', color: 'white' }}>+</button>
+                <button onClick={() => setWeight(Math.max(20, weight - 0.5))} style={{ ...btnStyle, background: 'rgba(139,170,61,0.1)', color: '#1B3C2A' }}>−</button>
+                <button onClick={() => setWeight(Math.min(200, weight + 0.5))} style={{ ...btnStyle, background: 'linear-gradient(135deg, #1B3C2A, #2D5A3F)', color: 'white' }}>+</button>
               </div>
             </div>
             <div style={{ position: 'relative' }}>
@@ -197,23 +197,23 @@ export default function OnboardingPage() {
                 style={{ width: '100%', position: 'relative', zIndex: 1, background: 'transparent' }} />
             </div>
             <div style={{ display: 'flex', justifyContent: 'space-between', marginTop: '4px' }}>
-              <span style={{ fontSize: '11px', color: '#8A8F84' }}>20 kg</span>
-              <span style={{ fontSize: '11px', color: '#8A8F84' }}>200 kg</span>
+              <span style={{ fontSize: '11px', color: '#B0ADA4' }}>20 kg</span>
+              <span style={{ fontSize: '11px', color: '#B0ADA4' }}>200 kg</span>
             </div>
           </div>
 
           {/* Height */}
-          <label style={{ fontSize: '12px', color: '#8A8F84', fontWeight: 500, display: 'block', marginBottom: '8px' }}>Height</label>
+          <label style={{ fontSize: '12px', color: '#7A8A6A', fontWeight: 600, display: 'block', marginBottom: '8px' }}>Height</label>
           <div style={{
-            backgroundColor: 'white', borderRadius: '16px', border: '1.5px solid #E8EDDA',
-            padding: '18px 20px', marginBottom: '20px',
+            background: 'rgba(255,255,255,0.72)', backdropFilter: 'blur(12px)', WebkitBackdropFilter: 'blur(12px)', borderRadius: '20px', border: '1px solid rgba(255,255,255,0.5)',
+            padding: '18px 20px', marginBottom: '20px', boxShadow: '0 2px 12px rgba(0,0,0,0.04)',
           }}>
             <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '12px', marginBottom: '16px' }}>
               <span style={{ fontSize: '42px', fontWeight: 700, color: '#1B3C2A', fontFamily: "'Space Grotesk', sans-serif", lineHeight: 1 }}>{height}</span>
-              <span style={{ fontSize: '18px', fontWeight: 600, color: '#8A8F84', alignSelf: 'flex-end', paddingBottom: '4px' }}>cm</span>
+              <span style={{ fontSize: '18px', fontWeight: 600, color: '#B0ADA4', alignSelf: 'flex-end', paddingBottom: '4px' }}>cm</span>
               <div style={{ display: 'flex', gap: '8px', marginLeft: '8px' }}>
-                <button onClick={() => setHeight(Math.max(100, height - 1))} style={{ ...btnStyle, backgroundColor: '#E8EDDA', color: '#1B3C2A' }}>−</button>
-                <button onClick={() => setHeight(Math.min(230, height + 1))} style={{ ...btnStyle, backgroundColor: '#1B3C2A', color: 'white' }}>+</button>
+                <button onClick={() => setHeight(Math.max(100, height - 1))} style={{ ...btnStyle, background: 'rgba(139,170,61,0.1)', color: '#1B3C2A' }}>−</button>
+                <button onClick={() => setHeight(Math.min(230, height + 1))} style={{ ...btnStyle, background: 'linear-gradient(135deg, #1B3C2A, #2D5A3F)', color: 'white' }}>+</button>
               </div>
             </div>
             <div style={{ position: 'relative' }}>
@@ -227,15 +227,15 @@ export default function OnboardingPage() {
                 style={{ width: '100%', position: 'relative', zIndex: 1, background: 'transparent' }} />
             </div>
             <div style={{ display: 'flex', justifyContent: 'space-between', marginTop: '4px' }}>
-              <span style={{ fontSize: '11px', color: '#8A8F84' }}>100 cm</span>
-              <span style={{ fontSize: '11px', color: '#8A8F84' }}>230 cm</span>
+              <span style={{ fontSize: '11px', color: '#B0ADA4' }}>100 cm</span>
+              <span style={{ fontSize: '11px', color: '#B0ADA4' }}>230 cm</span>
             </div>
           </div>
 
           {/* BMI */}
           {bmi && (
             <div style={{
-              backgroundColor: '#E8EDDA', borderRadius: '14px', padding: '14px 18px',
+              background: 'rgba(139,170,61,0.1)', border: '1px solid rgba(139,170,61,0.15)', borderRadius: '16px', padding: '14px 18px',
               textAlign: 'center',
             }}>
               <span style={{ fontSize: '14px', color: '#1B3C2A', fontWeight: 600 }}>
@@ -250,22 +250,23 @@ export default function OnboardingPage() {
     // Step 3: Activity level
     if (step === 3) return (
       <div style={{ padding: '0 24px' }}>
-        <h2 style={{ fontFamily: "'Space Grotesk', sans-serif", fontSize: '22px', fontWeight: 700, color: '#1B3C2A', margin: '0 0 6px' }}>How active are you?</h2>
-        <p style={{ fontSize: '13px', color: '#8A8F84', margin: '0 0 24px' }}>This adjusts your recommended calorie intake</p>
+        <h2 style={{ fontFamily: "'Space Grotesk', sans-serif", fontSize: '22px', fontWeight: 700, color: '#1B3C2A', margin: '0 0 6px', background: 'linear-gradient(135deg, #1B3C2A 0%, #2D5A3F 100%)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>How active are you?</h2>
+        <p style={{ fontSize: '13px', color: '#7A8A6A', margin: '0 0 24px' }}>This adjusts your recommended calorie intake</p>
         <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
           {activityOptions.map((opt) => {
             const selected = activity === opt.label
             return (
               <div key={opt.label} onClick={() => setActivity(opt.label)} style={{
-                backgroundColor: 'white', borderRadius: '14px',
+                background: 'rgba(255,255,255,0.6)', backdropFilter: 'blur(12px)', borderRadius: '18px',
                 padding: '16px 18px', cursor: 'pointer',
-                border: selected ? '2px solid #8BAA3D' : '1.5px solid #D4D1C8',
+                border: selected ? '1.5px solid rgba(139,170,61,0.5)' : '1px solid rgba(255,255,255,0.5)',
                 display: 'flex', alignItems: 'center', gap: '14px',
                 transition: 'all 0.2s ease',
+                boxShadow: selected ? '0 4px 16px rgba(139,170,61,0.1)' : '0 2px 8px rgba(0,0,0,0.03)',
               }}>
                 <div style={{
-                  width: '40px', height: '40px', borderRadius: '50%', flexShrink: 0,
-                  backgroundColor: selected ? '#8BAA3D' : '#E8EDDA',
+                  width: '40px', height: '40px', borderRadius: '14px', flexShrink: 0,
+                  background: selected ? 'linear-gradient(135deg, #8BAA3D, #A0C044)' : 'rgba(139,170,61,0.1)',
                   display: 'flex', alignItems: 'center', justifyContent: 'center',
                   transition: 'background-color 0.2s',
                 }}>
@@ -277,12 +278,12 @@ export default function OnboardingPage() {
                   <span style={{
                     fontSize: '14px', fontWeight: 600, color: '#1B3C2A', display: 'block',
                   }}>{opt.label}</span>
-                  <span style={{ fontSize: '12px', color: '#8A8F84' }}>{opt.sub}</span>
+                  <span style={{ fontSize: '12px', color: '#7A8A6A' }}>{opt.sub}</span>
                 </div>
                 {selected && (
                   <div style={{
                     width: '24px', height: '24px', borderRadius: '50%',
-                    backgroundColor: '#8BAA3D', display: 'flex',
+                    background: 'linear-gradient(135deg, #8BAA3D, #A0C044)', boxShadow: '0 2px 6px rgba(139,170,61,0.3)', display: 'flex',
                     alignItems: 'center', justifyContent: 'center', flexShrink: 0,
                   }}>
                     <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
@@ -300,22 +301,23 @@ export default function OnboardingPage() {
     // Step 4: Goal
     if (step === 4) return (
       <div style={{ padding: '0 24px' }}>
-        <h2 style={{ fontFamily: "'Space Grotesk', sans-serif", fontSize: '22px', fontWeight: 700, color: '#1B3C2A', margin: '0 0 6px' }}>What's your goal?</h2>
-        <p style={{ fontSize: '13px', color: '#8A8F84', margin: '0 0 24px' }}>We'll tailor your daily calorie targets</p>
+        <h2 style={{ fontFamily: "'Space Grotesk', sans-serif", fontSize: '22px', fontWeight: 700, color: '#1B3C2A', margin: '0 0 6px', background: 'linear-gradient(135deg, #1B3C2A 0%, #2D5A3F 100%)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>What's your goal?</h2>
+        <p style={{ fontSize: '13px', color: '#7A8A6A', margin: '0 0 24px' }}>We'll tailor your daily calorie targets</p>
         <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
           {goalOptions.map((opt) => {
             const selected = goal === opt.label
             return (
               <div key={opt.label} onClick={() => setGoal(opt.label)} style={{
-                backgroundColor: 'white', borderRadius: '14px',
+                background: 'rgba(255,255,255,0.6)', backdropFilter: 'blur(12px)', borderRadius: '18px',
                 padding: '16px 18px', cursor: 'pointer',
-                border: selected ? '2px solid #8BAA3D' : '1.5px solid #D4D1C8',
+                border: selected ? '1.5px solid rgba(139,170,61,0.5)' : '1px solid rgba(255,255,255,0.5)',
                 display: 'flex', alignItems: 'center', gap: '14px',
                 transition: 'all 0.2s ease',
+                boxShadow: selected ? '0 4px 16px rgba(139,170,61,0.1)' : '0 2px 8px rgba(0,0,0,0.03)',
               }}>
                 <div style={{
-                  width: '40px', height: '40px', borderRadius: '50%', flexShrink: 0,
-                  backgroundColor: selected ? '#8BAA3D' : '#E8EDDA',
+                  width: '40px', height: '40px', borderRadius: '14px', flexShrink: 0,
+                  background: selected ? 'linear-gradient(135deg, #8BAA3D, #A0C044)' : 'rgba(139,170,61,0.1)',
                   display: 'flex', alignItems: 'center', justifyContent: 'center',
                   fontSize: '18px', transition: 'background-color 0.2s',
                 }}>
@@ -325,12 +327,12 @@ export default function OnboardingPage() {
                   <span style={{
                     fontSize: '14px', fontWeight: 600, color: '#1B3C2A', display: 'block',
                   }}>{opt.label}</span>
-                  <span style={{ fontSize: '12px', color: '#8A8F84' }}>{opt.sub}</span>
+                  <span style={{ fontSize: '12px', color: '#7A8A6A' }}>{opt.sub}</span>
                 </div>
                 {selected && (
                   <div style={{
                     width: '24px', height: '24px', borderRadius: '50%',
-                    backgroundColor: '#8BAA3D', display: 'flex',
+                    background: 'linear-gradient(135deg, #8BAA3D, #A0C044)', boxShadow: '0 2px 6px rgba(139,170,61,0.3)', display: 'flex',
                     alignItems: 'center', justifyContent: 'center', flexShrink: 0,
                   }}>
                     <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
@@ -351,32 +353,34 @@ export default function OnboardingPage() {
         {/* Checkmark */}
         <div style={{
           width: '72px', height: '72px', borderRadius: '50%',
-          backgroundColor: '#8BAA3D', margin: '0 auto 20px',
+          background: 'linear-gradient(135deg, #8BAA3D, #A0C044)', margin: '0 auto 20px',
           display: 'flex', alignItems: 'center', justifyContent: 'center',
           boxShadow: '0 4px 16px rgba(139,170,61,0.3)',
+          animation: 'scaleIn 0.4s ease-out both',
         }}>
           <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
             <polyline points="20 6 9 17 4 12" />
           </svg>
         </div>
 
-        <h2 style={{ fontFamily: "'Space Grotesk', sans-serif", fontSize: '22px', fontWeight: 700, color: '#1B3C2A', margin: '0 0 6px' }}>Your plan is ready!</h2>
-        <p style={{ fontSize: '13px', color: '#8A8F84', margin: '0 0 28px' }}>Here's your personalized daily target</p>
+        <h2 style={{ fontFamily: "'Space Grotesk', sans-serif", fontSize: '22px', fontWeight: 700, color: '#1B3C2A', margin: '0 0 6px', background: 'linear-gradient(135deg, #1B3C2A 0%, #2D5A3F 100%)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>Your plan is ready!</h2>
+        <p style={{ fontSize: '13px', color: '#7A8A6A', margin: '0 0 28px' }}>Here's your personalized daily target</p>
 
         {/* Calories circle */}
         <div style={{
           width: '140px', height: '140px', borderRadius: '50%',
-          border: '4px solid #8BAA3D', margin: '0 auto 8px',
+          border: '4px solid rgba(139,170,61,0.4)', margin: '0 auto 8px',
           display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center',
-          backgroundColor: 'white',
+          background: 'rgba(255,255,255,0.72)', backdropFilter: 'blur(12px)',
+          boxShadow: '0 0 0 8px rgba(139,170,61,0.08)',
         }}>
           <span style={{ fontSize: '38px', fontWeight: 700, color: '#1B3C2A', fontFamily: "'Space Grotesk', sans-serif", lineHeight: 1 }}>{plan.calories}</span>
-          <span style={{ fontSize: '11px', color: '#8A8F84', fontWeight: 500 }}>kcal / day</span>
+          <span style={{ fontSize: '11px', color: '#7A8A6A', fontWeight: 500 }}>kcal / day</span>
         </div>
-        <p style={{ fontSize: '12px', color: '#8A8F84', margin: '4px 0 24px' }}>Total estimated daily</p>
+        <p style={{ fontSize: '12px', color: '#7A8A6A', margin: '4px 0 24px' }}>Total estimated daily</p>
 
         {/* Macro targets */}
-        <p style={{ fontSize: '12px', fontWeight: 600, color: '#8A8F84', textTransform: 'uppercase', letterSpacing: '0.5px', margin: '0 0 12px', textAlign: 'left' }}>Your macro targets</p>
+        <p style={{ fontSize: '12px', fontWeight: 600, color: '#B0ADA4', textTransform: 'uppercase', letterSpacing: '0.5px', margin: '0 0 12px', textAlign: 'left' }}>Your macro targets</p>
         <div style={{ display: 'flex', gap: '10px', marginBottom: '24px' }}>
           {[
             { label: 'Protein', value: `${plan.protein}g`, color: '#8BAA3D' },
@@ -384,19 +388,19 @@ export default function OnboardingPage() {
             { label: 'Fats', value: `${plan.fats}g`, color: '#1B3C2A' },
           ].map((m) => (
             <div key={m.label} style={{
-              flex: 1, backgroundColor: 'white', borderRadius: '14px',
-              padding: '14px 8px', border: '1.5px solid #E8EDDA', textAlign: 'center',
+              flex: 1, background: 'rgba(255,255,255,0.72)', backdropFilter: 'blur(12px)', borderRadius: '16px',
+              padding: '14px 8px', border: '1px solid rgba(255,255,255,0.5)', boxShadow: '0 2px 8px rgba(0,0,0,0.03)', textAlign: 'center',
             }}>
               <span style={{ fontSize: '20px', fontWeight: 700, color: m.color, display: 'block', fontFamily: "'Space Grotesk', sans-serif" }}>{m.value}</span>
-              <span style={{ fontSize: '11px', color: '#8A8F84' }}>{m.label}</span>
+              <span style={{ fontSize: '11px', color: '#7A8A6A' }}>{m.label}</span>
             </div>
           ))}
         </div>
 
         {/* Profile summary */}
-        <p style={{ fontSize: '12px', fontWeight: 600, color: '#8A8F84', textTransform: 'uppercase', letterSpacing: '0.5px', margin: '0 0 10px', textAlign: 'left' }}>Your profile</p>
+        <p style={{ fontSize: '12px', fontWeight: 600, color: '#B0ADA4', textTransform: 'uppercase', letterSpacing: '0.5px', margin: '0 0 10px', textAlign: 'left' }}>Your profile</p>
         <div style={{
-          backgroundColor: 'white', borderRadius: '14px', border: '1.5px solid #E8EDDA',
+          background: 'rgba(255,255,255,0.72)', backdropFilter: 'blur(12px)', borderRadius: '16px', border: '1px solid rgba(255,255,255,0.5)', boxShadow: '0 2px 8px rgba(0,0,0,0.03)',
           padding: '14px 18px', textAlign: 'left',
         }}>
           {[
@@ -406,9 +410,9 @@ export default function OnboardingPage() {
             <div key={r.label} style={{
               display: 'flex', justifyContent: 'space-between', alignItems: 'center',
               padding: '8px 0',
-              borderBottom: i === 0 ? '1px solid #F0EFE8' : 'none',
+              borderBottom: i === 0 ? '1px solid rgba(139,170,61,0.1)' : 'none',
             }}>
-              <span style={{ fontSize: '13px', color: '#8A8F84' }}>{r.label}</span>
+              <span style={{ fontSize: '13px', color: '#7A8A6A' }}>{r.label}</span>
               <span style={{ fontSize: '13px', fontWeight: 600, color: '#1B3C2A' }}>{r.value}</span>
             </div>
           ))}
@@ -418,21 +422,21 @@ export default function OnboardingPage() {
   }
 
   return (
-    <div style={{ backgroundColor: '#F4F3EC', minHeight: '100vh', display: 'flex', flexDirection: 'column' }}>
+    <div className="page-enter" style={{ minHeight: '100vh', display: 'flex', flexDirection: 'column' }}>
       {/* Top bar with progress */}
       {step > 0 && (
         <div style={{ padding: '20px 24px 0' }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: '14px', marginBottom: '16px' }}>
-            <button onClick={() => setStep(step - 1)} style={{ background: 'none', border: 'none', cursor: 'pointer', padding: '4px', display: 'flex' }}>
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#1B3C2A" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polyline points="15 18 9 12 15 6" /></svg>
+            <button onClick={() => setStep(step - 1)} style={{ background: 'rgba(255,255,255,0.72)', backdropFilter: 'blur(12px)', WebkitBackdropFilter: 'blur(12px)', border: '1px solid rgba(255,255,255,0.5)', borderRadius: '14px', width: '40px', height: '40px', display: 'flex', alignItems: 'center', justifyContent: 'center', boxShadow: '0 2px 12px rgba(0,0,0,0.06)', cursor: 'pointer', padding: 0 }}>
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#1B3C2A" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polyline points="15 18 9 12 15 6" /></svg>
             </button>
-            <div style={{ flex: 1, height: '4px', backgroundColor: '#E8EDDA', borderRadius: '2px', overflow: 'hidden' }}>
+            <div style={{ flex: 1, height: '4px', background: 'rgba(139,170,61,0.1)', borderRadius: '2px', overflow: 'hidden' }}>
               <div style={{
-                height: '100%', borderRadius: '2px', backgroundColor: '#8BAA3D',
+                height: '100%', borderRadius: '2px', background: 'linear-gradient(90deg, #8BAA3D, #A0C044)',
                 width: `${progress}%`, transition: 'width 0.3s ease',
               }} />
             </div>
-            <span style={{ fontSize: '11px', color: '#8A8F84', fontWeight: 500 }}>{step}/{totalSteps - 1}</span>
+            <span style={{ fontSize: '11px', color: '#B0ADA4', fontWeight: 500 }}>{step}/{totalSteps - 1}</span>
           </div>
         </div>
       )}
@@ -446,19 +450,20 @@ export default function OnboardingPage() {
       <div style={{ padding: '20px 24px 40px' }}>
         <button onClick={nextStep} disabled={!canNext()} style={{
           width: '100%', padding: '16px', borderRadius: '999px', border: 'none',
-          backgroundColor: canNext() ? '#8BAA3D' : '#D4D1C8',
-          color: 'white', fontSize: '15px', fontWeight: 600, cursor: canNext() ? 'pointer' : 'default',
+          background: canNext() ? 'linear-gradient(135deg, #8BAA3D, #A0C044)' : 'rgba(139,170,61,0.08)',
+          color: canNext() ? 'white' : '#B0ADA4', fontSize: '15px', fontWeight: 600, cursor: canNext() ? 'pointer' : 'default',
           fontFamily: "'Space Grotesk', sans-serif",
           transition: 'background-color 0.2s',
           display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '8px',
+          boxShadow: canNext() ? '0 4px 16px rgba(139,170,61,0.3)' : 'none',
         }}>
           {step === 0 ? "Let's go" : step === 5 ? 'Start exploring FitFork' : 'Continue'}
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke={canNext() ? 'white' : '#B0ADA4'} strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
             <line x1="5" y1="12" x2="19" y2="12" /><polyline points="12 5 19 12 12 19" />
           </svg>
         </button>
         {step === 5 && (
-          <p style={{ textAlign: 'center', fontSize: '12px', color: '#8A8F84', marginTop: '10px' }}>
+          <p style={{ textAlign: 'center', fontSize: '12px', color: '#7A8A6A', marginTop: '10px' }}>
             Adjust your plan later in settings
           </p>
         )}
