@@ -72,31 +72,38 @@ export default function FloatingBars() {
           width: '100%', maxWidth: '393px', zIndex: 40,
           padding: '0 16px', boxSizing: 'border-box',
         }}>
-          <div onClick={() => navigate('/drinks')} className="glass-dark" style={{
-            borderRadius: '20px', padding: '14px 18px',
-            display: 'flex', alignItems: 'center', justifyContent: 'space-between',
-            cursor: 'pointer',
-          }}>
-            <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
-              <div style={{
-                width: '30px', height: '30px', borderRadius: '50%',
-                background: 'linear-gradient(135deg, #8BAA3D, #A0C044)',
-                display: 'flex', alignItems: 'center', justifyContent: 'center',
-                boxShadow: '0 2px 8px rgba(139,170,61,0.3)',
+          {(() => {
+            const hasDrinks = cart.some((i) => i.type === 'drink')
+            const barLabel = hasDrinks ? 'View basket' : 'Add a drink'
+            const barDest = hasDrinks ? '/basket' : '/drinks'
+            return (
+              <div onClick={() => navigate(barDest)} className="glass-dark" style={{
+                borderRadius: '20px', padding: '14px 18px',
+                display: 'flex', alignItems: 'center', justifyContent: 'space-between',
+                cursor: 'pointer',
               }}>
-                <span style={{ fontSize: '12px', fontWeight: 700, color: 'white' }}>{cartCount}</span>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+                  <div style={{
+                    width: '30px', height: '30px', borderRadius: '50%',
+                    background: 'linear-gradient(135deg, #8BAA3D, #A0C044)',
+                    display: 'flex', alignItems: 'center', justifyContent: 'center',
+                    boxShadow: '0 2px 8px rgba(139,170,61,0.3)',
+                  }}>
+                    <span style={{ fontSize: '12px', fontWeight: 700, color: 'white' }}>{cartCount}</span>
+                  </div>
+                  <span style={{ fontSize: '14px', fontWeight: 600, color: 'white', fontFamily: "'Space Grotesk', sans-serif" }}>
+                    {barLabel}
+                  </span>
+                </div>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                  <span style={{ fontSize: '14px', fontWeight: 700, color: 'white' }}>
+                    CHF {cartTotal.toFixed(2)}
+                  </span>
+                  <span style={{ fontSize: '14px', color: '#8BAA3D' }}>→</span>
+                </div>
               </div>
-              <span style={{ fontSize: '14px', fontWeight: 600, color: 'white', fontFamily: "'Space Grotesk', sans-serif" }}>
-                View basket
-              </span>
-            </div>
-            <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-              <span style={{ fontSize: '14px', fontWeight: 700, color: 'white' }}>
-                CHF {cartTotal.toFixed(2)}
-              </span>
-              <span style={{ fontSize: '14px', color: '#8BAA3D' }}>→</span>
-            </div>
-          </div>
+            )
+          })()}
         </div>
       )}
     </>
