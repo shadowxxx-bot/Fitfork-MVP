@@ -46,6 +46,14 @@ import vinigrette from './plat/vinigrette sauce.png'
 import teriyakiSauce from './plat/teriyaki sauce.png'
 import spicySauce from './plat/spicy sauce.png'
 
+// Drinks
+import focusActive from './plat/focus-active.png'
+import focusAntiox from './plat/focus-antiox.png'
+import focusCare from './plat/focus-care.jpg'
+import chiefChoco from './plat/chief-choco.jpg'
+import chiefVani from './plat/chief-vani.jpg'
+import swissKombucha from './plat/swiss-kombucha.jpg'
+
 // Map by ingredient/item id
 const platImages = {
   // Menu items
@@ -98,6 +106,14 @@ const platImages = {
   'vinaigrette': vinigrette,
   'teriyaki': teriyakiSauce,
   'spicy-sauce': spicySauce,
+
+  // Drinks
+  'focus-active': focusActive,
+  'focus-antiox': focusAntiox,
+  'focus-care': focusCare,
+  'chief-choco': chiefChoco,
+  'chief-vani': chiefVani,
+  'swiss-kombucha': swissKombucha,
 }
 
 export default platImages

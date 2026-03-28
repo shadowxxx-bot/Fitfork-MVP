@@ -14,6 +14,7 @@ import CustomBowlVegPage from './pages/CustomBowlVegPage'
 import CustomBowlExtrasPage from './pages/CustomBowlExtrasPage'
 import CustomBowlRecapPage from './pages/CustomBowlRecapPage'
 import BasketPage from './pages/BasketPage'
+import DrinksPage from './pages/DrinksPage'
 import DeliveryPage from './pages/DeliveryPage'
 import CheckoutPage from './pages/CheckoutPage'
 import OrderConfirmPage from './pages/OrderConfirmPage'
@@ -63,6 +64,7 @@ export default function App() {
         <Route path="/custom/extras" element={<CustomBowlExtrasPage />} />
         <Route path="/custom/recap" element={<CustomBowlRecapPage />} />
         <Route path="/basket" element={<BasketPage />} />
+        <Route path="/drinks" element={<DrinksPage />} />
         <Route path="/delivery" element={<DeliveryPage />} />
         <Route path="/checkout" element={<CheckoutPage />} />
         <Route path="/order-confirm" element={<OrderConfirmPage />} />

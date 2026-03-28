@@ -156,14 +156,14 @@ export default function BasketPage() {
           </div>
 
           <div style={{ padding: '16px 24px 32px' }}>
-            <button onClick={() => navigate('/delivery')} style={{
+            <button onClick={() => navigate('/drinks')} style={{
               width: '100%', padding: '16px', borderRadius: '999px', border: 'none',
               background: 'linear-gradient(135deg, #8BAA3D, #A0C044)',
               color: 'white', fontSize: '15px', fontWeight: 600, cursor: 'pointer',
               boxShadow: '0 4px 16px rgba(139,170,61,0.3)',
               fontFamily: "'Space Grotesk', sans-serif",
               transition: 'transform 0.2s ease',
-            }}>Proceed to Delivery</button>
+            }}>Add a drink?</button>
           </div>
         </>
       )}

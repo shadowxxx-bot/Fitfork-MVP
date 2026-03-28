@@ -4,7 +4,7 @@ const hiddenPaths = [
   '/checkout', '/order-confirm', '/order-tracking', '/login', '/login-2',
   '/profile/preferences', '/profile/help', '/onboarding',
   '/custom/protein', '/custom/carbs', '/custom/veg', '/custom/extras', '/custom/recap',
-  '/basket', '/delivery', '/rewards/register', '/profile/edit',
+  '/basket', '/drinks', '/delivery', '/rewards/register', '/profile/edit',
 ]
 
 const tabs = [
