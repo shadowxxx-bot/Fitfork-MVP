@@ -2,7 +2,7 @@ import { useNavigate } from 'react-router-dom'
 import { useStore } from '../store/useStore'
 
 const paymentLabels = {
-  apple_pay: 'Apple Pay', twint: 'Twint', pay_on_site: 'Pay on site',
+  apple_pay: 'Apple Pay', twint: 'Twint', credit_card: 'Credit card',
 }
 
 export default function OrderConfirmPage() {

@@ -32,14 +32,16 @@ const paymentMethods = [
     icon: <TwintIcon />,
   },
   {
-    id: 'pay_on_site', label: 'Pay on site', sub: 'Cash or card at the counter',
+    id: 'credit_card', label: 'Credit card', sub: 'Visa, Mastercard, Amex',
     icon: (
       <div style={{
         width: '42px', height: '42px', borderRadius: '14px',
         background: 'rgba(139,170,61,0.1)', border: '1px solid rgba(139,170,61,0.15)',
         display: 'flex', alignItems: 'center', justifyContent: 'center',
       }}>
-        <span style={{ fontSize: '12px', fontWeight: 700, color: '#5A7A3A' }}>fr.</span>
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#5A7A3A" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+          <rect x="1" y="4" width="22" height="16" rx="2" /><line x1="1" y1="10" x2="23" y2="10" />
+        </svg>
       </div>
     ),
   },
@@ -56,6 +58,7 @@ export default function CheckoutPage() {
 
   const [paying, setPaying] = useState(false)
   const [done, setDone] = useState(false)
+  const [cardInfo, setCardInfo] = useState({ number: '', expiry: '', cvc: '', name: '' })
 
   const handlePay = () => {
     setPaying(true)
@@ -168,34 +171,99 @@ export default function CheckoutPage() {
 
         {paymentMethods.map((m, i) => {
           const selected = paymentMethod === m.id
+          const isCard = m.id === 'credit_card'
           return (
-            <div key={m.id} onClick={() => setPaymentMethod(m.id)} className="hover-lift" style={{
-              background: selected ? 'rgba(255,255,255,0.85)' : 'rgba(255,255,255,0.5)',
-              backdropFilter: 'blur(12px)', WebkitBackdropFilter: 'blur(12px)',
-              borderRadius: '20px', padding: '14px 16px',
-              marginBottom: '10px', display: 'flex', alignItems: 'center', gap: '14px',
-              border: selected ? '1.5px solid rgba(139,170,61,0.4)' : '1px solid rgba(255,255,255,0.5)',
-              cursor: 'pointer',
-              boxShadow: selected ? '0 4px 16px rgba(139,170,61,0.1)' : '0 2px 8px rgba(0,0,0,0.03)',
-              transition: 'all 0.25s ease',
-              animation: `fadeInUp ${0.3 + i * 0.08}s ease-out both`,
-            }}>
-              {m.icon}
-              <div style={{ flex: 1 }}>
-                <span style={{ fontSize: '14px', fontWeight: 600, color: '#1B3C2A', display: 'block' }}>{m.label}</span>
-                <span style={{ fontSize: '12px', color: '#7A8A6A' }}>{m.sub}</span>
-              </div>
-              <div style={{
-                width: '22px', height: '22px', borderRadius: '50%',
-                border: `2px solid ${selected ? '#8BAA3D' : 'rgba(0,0,0,0.1)'}`,
-                display: 'flex', alignItems: 'center', justifyContent: 'center',
+            <div key={m.id} style={{ marginBottom: '10px', animation: `fadeInUp ${0.3 + i * 0.08}s ease-out both` }}>
+              <div onClick={() => setPaymentMethod(m.id)} className="hover-lift" style={{
+                background: selected ? 'rgba(255,255,255,0.85)' : 'rgba(255,255,255,0.5)',
+                backdropFilter: 'blur(12px)', WebkitBackdropFilter: 'blur(12px)',
+                borderRadius: isCard && selected ? '20px 20px 0 0' : '20px', padding: '14px 16px',
+                display: 'flex', alignItems: 'center', gap: '14px',
+                border: selected ? '1.5px solid rgba(139,170,61,0.4)' : '1px solid rgba(255,255,255,0.5)',
+                borderBottom: isCard && selected ? '1px solid rgba(139,170,61,0.15)' : undefined,
+                cursor: 'pointer',
+                boxShadow: selected && !isCard ? '0 4px 16px rgba(139,170,61,0.1)' : '0 2px 8px rgba(0,0,0,0.03)',
                 transition: 'all 0.25s ease',
               }}>
-                {selected && <div style={{
-                  width: '12px', height: '12px', borderRadius: '50%',
-                  background: 'linear-gradient(135deg, #8BAA3D, #A0C044)',
-                }} />}
+                {m.icon}
+                <div style={{ flex: 1 }}>
+                  <span style={{ fontSize: '14px', fontWeight: 600, color: '#1B3C2A', display: 'block' }}>{m.label}</span>
+                  <span style={{ fontSize: '12px', color: '#7A8A6A' }}>{m.sub}</span>
+                </div>
+                <div style={{
+                  width: '22px', height: '22px', borderRadius: '50%',
+                  border: `2px solid ${selected ? '#8BAA3D' : 'rgba(0,0,0,0.1)'}`,
+                  display: 'flex', alignItems: 'center', justifyContent: 'center',
+                  transition: 'all 0.25s ease',
+                }}>
+                  {selected && <div style={{
+                    width: '12px', height: '12px', borderRadius: '50%',
+                    background: 'linear-gradient(135deg, #8BAA3D, #A0C044)',
+                  }} />}
+                </div>
               </div>
+              {/* Credit card form */}
+              {isCard && selected && (
+                <div style={{
+                  background: 'rgba(255,255,255,0.85)', backdropFilter: 'blur(12px)',
+                  borderRadius: '0 0 20px 20px', padding: '16px',
+                  border: '1.5px solid rgba(139,170,61,0.4)', borderTop: 'none',
+                  boxShadow: '0 4px 16px rgba(139,170,61,0.1)',
+                }}>
+                  {[
+                    { key: 'number', label: 'Card number', placeholder: '4242 4242 4242 4242' },
+                    { key: 'name', label: 'Cardholder name', placeholder: 'John Doe' },
+                  ].map((f) => (
+                    <div key={f.key} style={{ marginBottom: '12px' }}>
+                      <label style={{ fontSize: '11px', color: '#7A8A6A', fontWeight: 600, display: 'block', marginBottom: '6px' }}>{f.label}</label>
+                      <input
+                        value={cardInfo[f.key]}
+                        onChange={(e) => setCardInfo({ ...cardInfo, [f.key]: e.target.value })}
+                        placeholder={f.placeholder}
+                        style={{
+                          width: '100%', background: 'rgba(255,255,255,0.72)',
+                          border: '1px solid rgba(255,255,255,0.5)', borderRadius: '14px',
+                          padding: '14px', fontSize: '14px', color: '#1B3C2A', outline: 'none',
+                          boxSizing: 'border-box', fontFamily: "'Bricolage Grotesque', sans-serif",
+                          boxShadow: '0 2px 8px rgba(0,0,0,0.03)',
+                        }}
+                      />
+                    </div>
+                  ))}
+                  <div style={{ display: 'flex', gap: '10px' }}>
+                    <div style={{ flex: 1 }}>
+                      <label style={{ fontSize: '11px', color: '#7A8A6A', fontWeight: 600, display: 'block', marginBottom: '6px' }}>Expiry</label>
+                      <input
+                        value={cardInfo.expiry}
+                        onChange={(e) => setCardInfo({ ...cardInfo, expiry: e.target.value })}
+                        placeholder="MM/YY"
+                        style={{
+                          width: '100%', background: 'rgba(255,255,255,0.72)',
+                          border: '1px solid rgba(255,255,255,0.5)', borderRadius: '14px',
+                          padding: '14px', fontSize: '14px', color: '#1B3C2A', outline: 'none',
+                          boxSizing: 'border-box', fontFamily: "'Bricolage Grotesque', sans-serif",
+                          boxShadow: '0 2px 8px rgba(0,0,0,0.03)',
+                        }}
+                      />
+                    </div>
+                    <div style={{ flex: 1 }}>
+                      <label style={{ fontSize: '11px', color: '#7A8A6A', fontWeight: 600, display: 'block', marginBottom: '6px' }}>CVC</label>
+                      <input
+                        value={cardInfo.cvc}
+                        onChange={(e) => setCardInfo({ ...cardInfo, cvc: e.target.value })}
+                        placeholder="123"
+                        style={{
+                          width: '100%', background: 'rgba(255,255,255,0.72)',
+                          border: '1px solid rgba(255,255,255,0.5)', borderRadius: '14px',
+                          padding: '14px', fontSize: '14px', color: '#1B3C2A', outline: 'none',
+                          boxSizing: 'border-box', fontFamily: "'Bricolage Grotesque', sans-serif",
+                          boxShadow: '0 2px 8px rgba(0,0,0,0.03)',
+                        }}
+                      />
+                    </div>
+                  </div>
+                </div>
+              )}
             </div>
           )
         })}
