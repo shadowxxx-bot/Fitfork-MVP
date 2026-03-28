@@ -1,5 +1,6 @@
 import { Routes, Route, useLocation } from 'react-router-dom'
-import { useEffect } from 'react'
+import { useState, useEffect, useCallback } from 'react'
+import SplashScreen from './components/SplashScreen'
 import NavBar from './components/NavBar'
 import FloatingBars from './components/FloatingBars'
 import HomePage from './pages/HomePage'
@@ -35,8 +36,12 @@ function ScrollToTop() {
 }
 
 export default function App() {
+  const [showSplash, setShowSplash] = useState(true)
+  const hideSplash = useCallback(() => setShowSplash(false), [])
+
   return (
     <div style={{ maxWidth: '393px', margin: '0 auto', minHeight: '100vh', backgroundColor: '#F4F3EC', position: 'relative' }}>
+      {showSplash && <SplashScreen onDone={hideSplash} />}
       <ScrollToTop />
       <Routes>
         <Route path="/login" element={<LoginPage />} />
