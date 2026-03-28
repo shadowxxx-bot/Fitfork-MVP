@@ -103,7 +103,7 @@ export default function OnboardingPage() {
           <img src={logoPng} alt="FitFork" style={{ width: '90px', height: '90px', objectFit: 'contain' }} />
         </div>
         <h1 style={{ fontFamily: "'Space Grotesk', sans-serif", fontSize: '28px', fontWeight: 700, color: '#1B3C2A', margin: '0 0 12px' }}>
-          Bienvenue chez<br /><span style={{ background: 'linear-gradient(135deg, #8BAA3D, #A0C044)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>FitFork</span>
+          Welcome to<br /><span style={{ background: 'linear-gradient(135deg, #8BAA3D, #A0C044)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>FitFork</span>
         </h1>
         <p style={{ fontSize: '14px', color: '#7A8A6A', lineHeight: 1.5, maxWidth: '280px' }}>
           Let's set up your profile to personalize your experience
