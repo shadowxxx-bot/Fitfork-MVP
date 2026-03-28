@@ -1,11 +1,9 @@
-import { useNavigate, useSearchParams } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import { useStore } from '../store/useStore'
 import platImages from '../assets/platImages'
 
 export default function BasketPage() {
   const navigate = useNavigate()
-  const [searchParams] = useSearchParams()
-  const fromDrinks = searchParams.get('from') === 'drinks'
   const { cart, addPresetToCart, removeOneFromCart, removeFromCart, getCartTotal } = useStore()
   const total = getCartTotal()
 
@@ -158,14 +156,14 @@ export default function BasketPage() {
           </div>
 
           <div style={{ padding: '16px 24px 32px' }}>
-            <button onClick={() => navigate(fromDrinks ? '/delivery' : '/drinks')} style={{
+            <button onClick={() => navigate('/delivery')} style={{
               width: '100%', padding: '16px', borderRadius: '999px', border: 'none',
               background: 'linear-gradient(135deg, #8BAA3D, #A0C044)',
               color: 'white', fontSize: '15px', fontWeight: 600, cursor: 'pointer',
               boxShadow: '0 4px 16px rgba(139,170,61,0.3)',
               fontFamily: "'Space Grotesk', sans-serif",
               transition: 'transform 0.2s ease',
-            }}>{fromDrinks ? 'Proceed to Delivery' : 'Add a drink?'}</button>
+            }}>Proceed to Delivery</button>
           </div>
         </>
       )}

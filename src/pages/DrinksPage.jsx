@@ -44,8 +44,8 @@ export default function DrinksPage() {
     })
   }
 
-  const handleSkip = () => navigate('/basket?from=drinks')
-  const handleContinue = () => navigate('/basket?from=drinks')
+  const handleSkip = () => navigate('/basket')
+  const handleContinue = () => navigate('/basket')
 
   const hasDrinks = cart.some((i) => i.type === 'drink')
 

@@ -64,7 +64,7 @@ export default function MenuPage() {
             <img src={logoPng} alt="FitFork" style={{ width: '24px', height: '24px', objectFit: 'contain' }} />
           </div>
         </div>
-        <button onClick={() => navigate('/basket')} style={{
+        <button onClick={() => navigate('/drinks')} style={{
           background: 'rgba(255,255,255,0.72)',
           backdropFilter: 'blur(12px)', WebkitBackdropFilter: 'blur(12px)',
           border: '1px solid rgba(255,255,255,0.5)',

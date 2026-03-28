@@ -72,7 +72,7 @@ export default function FloatingBars() {
           width: '100%', maxWidth: '393px', zIndex: 40,
           padding: '0 16px', boxSizing: 'border-box',
         }}>
-          <div onClick={() => navigate('/basket')} className="glass-dark" style={{
+          <div onClick={() => navigate('/drinks')} className="glass-dark" style={{
             borderRadius: '20px', padding: '14px 18px',
             display: 'flex', alignItems: 'center', justifyContent: 'space-between',
             cursor: 'pointer',
