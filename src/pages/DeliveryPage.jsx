@@ -4,7 +4,7 @@ import { useStore } from '../store/useStore'
 
 export default function DeliveryPage() {
   const navigate = useNavigate()
-  const { deliveryInfo, setDeliveryInfo } = useStore()
+  const { deliveryInfo, setDeliveryInfo, deliveryTime, setDeliveryTime } = useStore()
   const [form, setForm] = useState({ ...deliveryInfo })
   const [focusedKey, setFocusedKey] = useState(null)
 
@@ -84,6 +84,34 @@ export default function DeliveryPage() {
             />
           </div>
         ))}
+
+        {/* Time slot selection */}
+        <div style={{ marginTop: '24px' }}>
+          <label style={{
+            display: 'block', fontSize: '12px', color: '#7A8A6A', fontWeight: 600,
+            marginBottom: '10px', letterSpacing: '0.3px',
+          }}>Delivery time</label>
+          <div style={{ display: 'flex', gap: '10px' }}>
+            {['12:00', '12:30', '13:00'].map((slot) => {
+              const selected = deliveryTime === slot
+              return (
+                <button key={slot} type="button" onClick={() => setDeliveryTime(slot)} style={{
+                  flex: 1, padding: '14px 0', borderRadius: '16px',
+                  background: selected ? 'linear-gradient(135deg, #8BAA3D, #A0C044)' : 'rgba(255,255,255,0.72)',
+                  backdropFilter: selected ? 'none' : 'blur(12px)', WebkitBackdropFilter: selected ? 'none' : 'blur(12px)',
+                  border: selected ? '1.5px solid rgba(139,170,61,0.5)' : '1px solid rgba(255,255,255,0.5)',
+                  color: selected ? 'white' : '#1B3C2A',
+                  fontSize: '15px', fontWeight: 700, cursor: 'pointer',
+                  fontFamily: "'Space Grotesk', sans-serif",
+                  boxShadow: selected ? '0 4px 16px rgba(139,170,61,0.3)' : '0 2px 8px rgba(0,0,0,0.03)',
+                  transition: 'all 0.25s ease',
+                }}>
+                  {slot}
+                </button>
+              )
+            })}
+          </div>
+        </div>
 
         <button type="submit" style={{
           width: '100%', padding: '18px', borderRadius: '999px', border: 'none',

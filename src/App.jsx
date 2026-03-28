@@ -4,7 +4,7 @@ import NavBar from './components/NavBar'
 import FloatingBars from './components/FloatingBars'
 import HomePage from './pages/HomePage'
 import MenuPage from './pages/MenuPage'
-import MapsPage from './pages/MapsPage'
+import LeaderboardPage from './pages/LeaderboardPage'
 import DeliveryFeesPage from './pages/DeliveryFeesPage'
 import OpeningHoursPage from './pages/OpeningHoursPage'
 import CustomBowlProteinPage from './pages/CustomBowlProteinPage'
@@ -44,14 +44,14 @@ export default function App() {
         <Route path="/onboarding" element={<OnboardingPage />} />
         <Route path="/" element={<HomePage />} />
         <Route path="/menu" element={<MenuPage />} />
-        <Route path="/maps" element={<MapsPage />} />
+        <Route path="/leaderboard" element={<LeaderboardPage />} />
         <Route path="/rewards" element={<RewardsPage />} />
         <Route path="/profile" element={<ProfilePage />} />
         <Route path="/profile/edit" element={<EditProfilePage />} />
         <Route path="/profile/preferences" element={<PreferencesPage />} />
         <Route path="/profile/help" element={<HelpSupportPage />} />
-        <Route path="/maps/delivery-fees" element={<DeliveryFeesPage />} />
-        <Route path="/maps/opening-hours" element={<OpeningHoursPage />} />
+        <Route path="/delivery-fees" element={<DeliveryFeesPage />} />
+        <Route path="/opening-hours" element={<OpeningHoursPage />} />
         <Route path="/custom/protein" element={<CustomBowlProteinPage />} />
         <Route path="/custom/carbs" element={<CustomBowlCarbsPage />} />
         <Route path="/custom/veg" element={<CustomBowlVegPage />} />

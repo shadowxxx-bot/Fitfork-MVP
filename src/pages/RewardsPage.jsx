@@ -5,9 +5,9 @@ import { useStore } from '../store/useStore'
 /* ── Milestone definitions ── */
 const milestones = [
   { orders: 5, title: 'First Bite!', sub: 'You just unlocked your first reward', discount: 3, emoji: '🌱', label: '-3% on next order', tier: 'Starter' },
-  { orders: 10, title: 'Getting Hooked!', sub: 'Your discount keeps growing', discount: 5, emoji: '🌿', label: '-5% cumulative', tier: 'Regular' },
-  { orders: 20, title: 'On Fire!', sub: 'Half way to Bronze — keep going', discount: 8, emoji: '🔥', label: '-8% cumulative', tier: 'Fan' },
-  { orders: 50, title: 'Bronze Legend!', sub: '-12% on every order + free dish', discount: 12, emoji: '🏆', label: '-12% + free dish', tier: 'Bronze', isMax: true },
+  { orders: 10, title: 'Getting Hooked!', sub: 'You earned a one-time discount', discount: 5, emoji: '🌿', label: '-5% one-time', tier: 'Regular' },
+  { orders: 20, title: 'On Fire!', sub: 'Half way to Bronze — keep going', discount: 8, emoji: '🔥', label: '-8% on next order', tier: 'Fan' },
+  { orders: 50, title: 'Bronze Legend!', sub: '-12% on next order + free dish', discount: 12, emoji: '🏆', label: '-12% + free dish', tier: 'Bronze', isMax: true },
 ]
 
 /* ── Demo states ── */
@@ -116,7 +116,7 @@ export default function RewardsPage() {
   const achievements = [
     { emoji: '🌱', title: 'First Order', sub: 'Place your first order', done: state.orders >= 1 },
     { emoji: '🔥', title: '5-Streak', sub: 'Order 5 times', done: state.orders >= 5, reward: '-3%' },
-    { emoji: '⚡', title: '10-Streak', sub: 'Order 10 times', done: state.orders >= 10, reward: '-5%' },
+    { emoji: '⚡', title: '10-Streak', sub: 'Order 10 times', done: state.orders >= 10, reward: '-5% one-time' },
     { emoji: '💎', title: '20-Streak', sub: 'Order 20 times', done: state.orders >= 20, reward: '-8%' },
     { emoji: '🏆', title: 'Bronze Legend', sub: 'Reach 50 orders', done: state.orders >= 50, reward: '-12% + free dish' },
     { emoji: '🥗', title: 'Bowl Master', sub: 'Try 3 different bowls', done: state.orders >= 7 },
@@ -166,7 +166,7 @@ export default function RewardsPage() {
               <div style={{ flex: 1, background: 'rgba(139,170,61,0.15)', border: '1px solid rgba(139,170,61,0.25)', borderRadius: '20px', padding: '20px 14px', textAlign: 'center' }}>
                 <span style={{ fontSize: '32px', display: 'block', marginBottom: '8px' }}>🏷️</span>
                 <span style={{ fontSize: '22px', fontWeight: 800, color: 'white', display: 'block' }}>-{milestonePopup.discount}%</span>
-                <span style={{ fontSize: '11px', color: '#A8C07A', marginTop: '4px', display: 'block' }}>Every order</span>
+                <span style={{ fontSize: '11px', color: '#A8C07A', marginTop: '4px', display: 'block' }}>Next order</span>
               </div>
               {milestonePopup.isMax && (
                 <div style={{ flex: 1, background: 'rgba(255,215,0,0.1)', border: '1px solid rgba(255,215,0,0.25)', borderRadius: '20px', padding: '20px 14px', textAlign: 'center' }}>

@@ -47,10 +47,10 @@ const paymentMethods = [
 
 export default function CheckoutPage() {
   const navigate = useNavigate()
-  const { cart, getCartTotal, placeOrder, paymentMethod, setPaymentMethod, deliveryInfo } = useStore()
+  const { cart, getCartTotal, placeOrder, paymentMethod, setPaymentMethod, deliveryInfo, deliveryTime } = useStore()
   const subtotal = getCartTotal()
   const serviceFee = 0
-  const streakDiscount = subtotal > 0 ? +(subtotal * 0.10).toFixed(2) : 0
+  const streakDiscount = subtotal > 0 ? +(subtotal * 0.05).toFixed(2) : 0
   const total = +(subtotal - streakDiscount + serviceFee).toFixed(2)
   const itemCount = cart.length
 
@@ -147,7 +147,7 @@ export default function CheckoutPage() {
             <span style={{ fontSize: '14px', fontWeight: 600, color: '#1B3C2A', display: 'block' }}>
               {deliveryInfo.city || 'Lancy Pont-Rouge'}
             </span>
-            <span style={{ fontSize: '12px', color: '#7A8A6A' }}>Ready in ~12 min · Delivery</span>
+            <span style={{ fontSize: '12px', color: '#7A8A6A' }}>{deliveryTime ? `Delivery at ${deliveryTime}` : 'Delivery'}</span>
           </div>
           <div style={{
             width: '28px', height: '28px', borderRadius: '50%',
@@ -214,7 +214,7 @@ export default function CheckoutPage() {
             <>
               <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '8px' }}>
                 <span style={{ fontSize: '14px', fontWeight: 600, color: '#1B3C2A' }}>Tropical Shrimp</span>
-                <span style={{ fontSize: '14px', fontWeight: 600, color: '#1B3C2A' }}>CHF 15.50</span>
+                <span style={{ fontSize: '14px', fontWeight: 600, color: '#1B3C2A' }}>CHF 18.50</span>
               </div>
               <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '12px' }}>
                 <span style={{ fontSize: '14px', fontWeight: 600, color: '#1B3C2A' }}>Build your own bowl</span>
@@ -238,7 +238,7 @@ export default function CheckoutPage() {
                   width: '16px', height: '16px', borderRadius: '6px',
                   background: 'linear-gradient(135deg, #8BAA3D, #A0C044)',
                 }} />
-                <span style={{ fontSize: '12px', fontWeight: 600, color: '#1B3C2A' }}>-10% streak active</span>
+                <span style={{ fontSize: '12px', fontWeight: 600, color: '#1B3C2A' }}>-5% streak reward</span>
               </div>
               <span style={{ fontSize: '13px', color: '#8BAA3D', fontWeight: 600 }}>- CHF {(streakDiscount || 3.15).toFixed(2)}</span>
             </div>

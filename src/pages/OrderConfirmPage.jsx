@@ -8,20 +8,21 @@ const paymentLabels = {
 export default function OrderConfirmPage() {
   const navigate = useNavigate()
   const currentOrder = useStore((s) => s.currentOrder)
+  const deliveryTime = useStore((s) => s.deliveryTime)
 
   const order = currentOrder || {
     id: '#041',
     items: [
-      { id: 1, name: 'Tropical Shrimp', desc: 'Shrimps, rice, avocado and tropical mix', kcal: 590, protein: 35, carbs: 62, fat: 22, price: 15.50 },
+      { id: 1, name: 'Tropical Shrimp', desc: 'Shrimps, rice, avocado and tropical mix', kcal: 590, protein: 35, carbs: 62, fat: 22, price: 18.50 },
       { id: 2, name: 'Build your own bowl', desc: 'Salmon teriyaki, rice, broccoli,', kcal: 545, protein: 50, carbs: 60, fat: 20, price: 15.00 },
     ],
-    total: 27.35,
+    total: 31.83,
     payment: 'apple_pay',
     deliveryInfo: { city: 'Lancy Pont-Rouge' },
   }
 
   const subtotal = order.items.reduce((s, i) => s + i.price, 0)
-  const streakDiscount = +(subtotal * 0.10).toFixed(2)
+  const streakDiscount = +(subtotal * 0.05).toFixed(2)
   const total = order.total || +(subtotal - streakDiscount).toFixed(2)
 
   const totalNutrition = order.items.reduce(
@@ -93,7 +94,7 @@ export default function OrderConfirmPage() {
             <span style={{ fontSize: '14px', fontWeight: 600, color: '#1B3C2A', display: 'block' }}>
               {order.deliveryInfo?.city || 'Lancy Pont-Rouge'}
             </span>
-            <span style={{ fontSize: '12px', color: '#7A8A6A' }}>Ready in ~12 min · Delivery</span>
+            <span style={{ fontSize: '12px', color: '#7A8A6A' }}>{deliveryTime ? `Delivery at ${deliveryTime}` : 'Delivery'}</span>
           </div>
           <div style={{
             width: '28px', height: '28px', borderRadius: '50%',
@@ -154,7 +155,7 @@ export default function OrderConfirmPage() {
                   width: '16px', height: '16px', borderRadius: '6px',
                   background: 'linear-gradient(135deg, #8BAA3D, #A0C044)',
                 }} />
-                <span style={{ fontSize: '12px', fontWeight: 600, color: '#1B3C2A' }}>-10% streak active</span>
+                <span style={{ fontSize: '12px', fontWeight: 600, color: '#1B3C2A' }}>-5% streak reward</span>
               </div>
               <span style={{ fontSize: '13px', color: '#8BAA3D', fontWeight: 600 }}>- CHF {streakDiscount.toFixed(2)}</span>
             </div>

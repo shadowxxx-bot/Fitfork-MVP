@@ -114,6 +114,8 @@ export const useStore = create((set, get) => ({
   // Delivery info
   deliveryInfo: { firstName: '', lastName: '', company: '', address: '', houseNumber: '', postalCode: '', city: '' },
   setDeliveryInfo: (info) => set({ deliveryInfo: info }),
+  deliveryTime: null,
+  setDeliveryTime: (t) => set({ deliveryTime: t }),
 
   // Rewards / Streak
   totalOrders: 4,

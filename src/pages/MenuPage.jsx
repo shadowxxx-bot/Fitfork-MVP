@@ -4,11 +4,11 @@ import platImages from '../assets/platImages'
 import logoPng from '../assets/logo.png'
 
 const menuItems = [
-  { id: 'golden-salmon', name: 'Golden Salmon', desc: 'Salmon, sweet potatoes, broccoli', kcal: 500, protein: 36, carbs: 36, fat: 24, price: 15.50 },
-  { id: 'sunny-chickpea', name: 'Sunny Chickpea', desc: 'Quinoa, chickpeas, hummus, veggie crunch', kcal: 510, protein: 18, carbs: 60, fat: 20, price: 12.90 },
-  { id: 'tropical-shrimp', name: 'Tropical Shrimp', desc: 'Shrimp, mango, avocado, coconut rice', kcal: 480, protein: 30, carbs: 44, fat: 20, price: 15.90 },
-  { id: 'mediterranean-bowl', name: 'Mediterranean Feast', desc: 'Falafel, hummus, tabbouleh, olives, pita', kcal: 450, protein: 22, carbs: 48, fat: 22, price: 13.90 },
-  { id: 'tex-mex-power', name: 'Tex-Mex Power Plate', desc: 'Black beans, rice, guacamole, spicy sauce', kcal: 540, protein: 28, carbs: 56, fat: 22, price: 14.90 },
+  { id: 'golden-salmon', name: 'Golden Salmon', desc: 'Salmon, sweet potatoes, broccoli', kcal: 500, protein: 36, carbs: 36, fat: 24, price: 18.50 },
+  { id: 'sunny-chickpea', name: 'Sunny Chickpea', desc: 'Quinoa, chickpeas, hummus, veggie crunch', kcal: 510, protein: 18, carbs: 60, fat: 20, price: 16.50 },
+  { id: 'tropical-shrimp', name: 'Tropical Shrimp', desc: 'Shrimp, mango, avocado, coconut rice', kcal: 480, protein: 30, carbs: 44, fat: 20, price: 18.50 },
+  { id: 'mediterranean-bowl', name: 'Mediterranean Feast', desc: 'Falafel, hummus, tabbouleh, olives, pita', kcal: 450, protein: 22, carbs: 48, fat: 22, price: 16.50 },
+  { id: 'tex-mex-power', name: 'Tex-Mex Power Plate', desc: 'Black beans, rice, guacamole, spicy sauce', kcal: 540, protein: 28, carbs: 56, fat: 22, price: 17.50 },
 ]
 
 const steps = [
@@ -90,6 +90,29 @@ export default function MenuPage() {
             </div>
           )}
         </button>
+      </div>
+
+      {/* Order notice banner */}
+      <div style={{ padding: '16px 18px 0', animation: 'fadeInUp 0.3s ease-out' }}>
+        <div style={{
+          background: 'rgba(139,170,61,0.1)',
+          border: '1px solid rgba(139,170,61,0.2)',
+          borderRadius: '14px', padding: '12px 16px',
+          display: 'flex', alignItems: 'center', gap: '10px',
+        }}>
+          <div style={{
+            width: '28px', height: '28px', borderRadius: '10px',
+            background: 'linear-gradient(135deg, #8BAA3D, #A0C044)',
+            display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0,
+          }}>
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+              <circle cx="12" cy="12" r="10" /><polyline points="12 6 12 12 16 14" />
+            </svg>
+          </div>
+          <span style={{ fontSize: '13px', fontWeight: 600, color: '#1B3C2A' }}>
+            You can order for the same day until 11am
+          </span>
+        </div>
       </div>
 
       {/* Title */}

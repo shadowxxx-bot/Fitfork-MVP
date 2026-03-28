@@ -29,11 +29,13 @@ const tabs = [
     ),
   },
   {
-    path: '/maps', label: 'Maps',
+    path: '/leaderboard', label: 'Ranking',
     icon: (a) => (
       <svg width="21" height="21" viewBox="0 0 24 24" fill={a ? '#1B3C2A' : 'none'} stroke={a ? '#1B3C2A' : '#9A9E94'} strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
-        <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" />
-        <circle cx="12" cy="10" r="3" fill={a ? 'white' : 'none'} />
+        <path d="M6 9H4.5a2.5 2.5 0 010-5H6" /><path d="M18 9h1.5a2.5 2.5 0 000-5H18" />
+        <path d="M4 22h16" /><path d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22" />
+        <path d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22" />
+        <path d="M18 2H6v7a6 6 0 1012 0V2Z" />
       </svg>
     ),
   },
