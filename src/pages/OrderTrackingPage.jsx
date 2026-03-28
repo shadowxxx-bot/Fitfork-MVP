@@ -2,16 +2,17 @@ import { useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useStore } from '../store/useStore'
 
-const steps = [
-  { title: 'Order confirmed', sub: '8:04 · Payment received' },
-  { title: 'Preparing your meal', sub: '8:06 · Kitchen started' },
-  { title: 'On the way', sub: 'Your rider is heading to you' },
-  { title: 'Delivered', sub: 'Estimated 8:55' },
-]
-
 export default function OrderTrackingPage() {
   const navigate = useNavigate()
-  const { currentOrder, orderStep, advanceOrderStep } = useStore()
+  const { currentOrder, orderStep, advanceOrderStep, deliveryTime } = useStore()
+
+  const slot = deliveryTime || '12:00'
+  const steps = [
+    { title: 'Order confirmed', sub: 'Payment received' },
+    { title: 'Preparing your meal', sub: 'Kitchen started' },
+    { title: 'On the way', sub: 'Your rider is heading to you' },
+    { title: 'Delivered', sub: `Estimated ${slot}` },
+  ]
 
   useEffect(() => {
     if (!currentOrder || orderStep >= 3) return
@@ -75,7 +76,7 @@ export default function OrderTrackingPage() {
           <div>
             <span style={{ fontSize: '11px', color: 'rgba(139,170,61,0.6)', display: 'block' }}>Order {currentOrder.id}</span>
             <span style={{ fontSize: '17px', fontWeight: 700, color: 'white', fontFamily: "'Space Grotesk', sans-serif" }}>
-              Arriving in ~15 min
+              Arriving at {slot}
             </span>
           </div>
           <div style={{
