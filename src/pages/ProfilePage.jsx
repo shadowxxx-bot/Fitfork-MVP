@@ -143,14 +143,14 @@ export default function ProfilePage() {
       {/* NUTRITION GOALS */}
       <div style={{ padding: '0 24px', marginBottom: '16px' }}>
         <div style={{ background: 'rgba(255,255,255,0.72)', backdropFilter: 'blur(16px)', WebkitBackdropFilter: 'blur(16px)', border: '1px solid rgba(255,255,255,0.5)', boxShadow: '0 4px 24px rgba(0,0,0,0.04), 0 1px 2px rgba(0,0,0,0.02)', borderRadius: '20px', padding: '16px 18px' }}>
-          <p style={{ fontSize: '11px', fontWeight: 700, color: '#B0ADA4', textTransform: 'uppercase', letterSpacing: '1px', margin: '0 0 12px' }}>Nutrition goals per day</p>
+          <p style={{ fontSize: '11px', fontWeight: 700, color: '#B0ADA4', textTransform: 'uppercase', letterSpacing: '1px', margin: '0 0 12px' }}>Nutrition goals per meal</p>
 
           <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '10px', marginBottom: '14px' }}>
             {[
-              { label: 'Calories', value: computed.calories, unit: 'kcal' },
-              { label: 'Protein', value: computed.protein, unit: 'g' },
-              { label: 'Carbs', value: computed.carbs, unit: 'g' },
-              { label: 'Fats', value: computed.fats, unit: 'g' },
+              { label: 'Calories', value: Math.round(computed.calories / 3), unit: 'kcal' },
+              { label: 'Protein', value: Math.round(computed.protein / 3), unit: 'g' },
+              { label: 'Carbs', value: Math.round(computed.carbs / 3), unit: 'g' },
+              { label: 'Fats', value: Math.round(computed.fats / 3), unit: 'g' },
             ].map((n, i) => (
               <div key={n.label} style={{ background: 'rgba(139,170,61,0.06)', border: '1px solid rgba(139,170,61,0.1)', borderRadius: '16px', padding: '12px 14px' }}>
                 <span style={{ fontSize: '11px', color: '#8A8F84', display: 'block', marginBottom: '4px' }}>{n.label}</span>
@@ -164,7 +164,7 @@ export default function ProfilePage() {
           </div>
 
           <div style={{ fontSize: '10px', color: '#B0ADA4', textAlign: 'center', marginBottom: '8px' }}>
-            Auto-calculated from your profile
+            Auto-calculated from your profile (3 meals/day)
           </div>
 
           <div style={{ height: '1px', backgroundColor: 'rgba(139,170,61,0.1)', margin: '4px 0' }} />

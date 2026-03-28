@@ -364,7 +364,7 @@ export default function OnboardingPage() {
         </div>
 
         <h2 style={{ fontFamily: "'Space Grotesk', sans-serif", fontSize: '22px', fontWeight: 700, color: '#1B3C2A', margin: '0 0 6px', background: 'linear-gradient(135deg, #1B3C2A 0%, #2D5A3F 100%)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>Your plan is ready!</h2>
-        <p style={{ fontSize: '13px', color: '#7A8A6A', margin: '0 0 28px' }}>Here's your personalized daily target</p>
+        <p style={{ fontSize: '13px', color: '#7A8A6A', margin: '0 0 28px' }}>Here's your personalized target per meal</p>
 
         {/* Calories circle */}
         <div style={{
@@ -374,18 +374,18 @@ export default function OnboardingPage() {
           background: 'rgba(255,255,255,0.72)', backdropFilter: 'blur(12px)',
           boxShadow: '0 0 0 8px rgba(139,170,61,0.08)',
         }}>
-          <span style={{ fontSize: '38px', fontWeight: 700, color: '#1B3C2A', fontFamily: "'Space Grotesk', sans-serif", lineHeight: 1 }}>{plan.calories}</span>
-          <span style={{ fontSize: '11px', color: '#7A8A6A', fontWeight: 500 }}>kcal / day</span>
+          <span style={{ fontSize: '38px', fontWeight: 700, color: '#1B3C2A', fontFamily: "'Space Grotesk', sans-serif", lineHeight: 1 }}>{Math.round(plan.calories / 3)}</span>
+          <span style={{ fontSize: '11px', color: '#7A8A6A', fontWeight: 500 }}>kcal / meal</span>
         </div>
-        <p style={{ fontSize: '12px', color: '#7A8A6A', margin: '4px 0 24px' }}>Total estimated daily</p>
+        <p style={{ fontSize: '12px', color: '#7A8A6A', margin: '4px 0 24px' }}>Estimated per meal (3 meals/day)</p>
 
         {/* Macro targets */}
         <p style={{ fontSize: '12px', fontWeight: 600, color: '#B0ADA4', textTransform: 'uppercase', letterSpacing: '0.5px', margin: '0 0 12px', textAlign: 'left' }}>Your macro targets</p>
         <div style={{ display: 'flex', gap: '10px', marginBottom: '24px' }}>
           {[
-            { label: 'Protein', value: `${plan.protein}g`, color: '#8BAA3D' },
-            { label: 'Carbs', value: `${plan.carbs}g`, color: '#5A7A3A' },
-            { label: 'Fats', value: `${plan.fats}g`, color: '#1B3C2A' },
+            { label: 'Protein', value: `${Math.round(plan.protein / 3)}g`, color: '#8BAA3D' },
+            { label: 'Carbs', value: `${Math.round(plan.carbs / 3)}g`, color: '#5A7A3A' },
+            { label: 'Fats', value: `${Math.round(plan.fats / 3)}g`, color: '#1B3C2A' },
           ].map((m) => (
             <div key={m.label} style={{
               flex: 1, background: 'rgba(255,255,255,0.72)', backdropFilter: 'blur(12px)', borderRadius: '16px',

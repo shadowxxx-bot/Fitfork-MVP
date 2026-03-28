@@ -1,4 +1,5 @@
 import { useNavigate } from 'react-router-dom'
+import { useStore } from '../store/useStore'
 
 const podium = [
   { rank: 2, name: 'Sarah M.', orders: 47, avatar: 'S' },
@@ -26,6 +27,29 @@ const podiumHeights = { 1: 120, 2: 90, 3: 70 }
 
 export default function LeaderboardPage() {
   const navigate = useNavigate()
+  const isLoggedIn = useStore((s) => s.isLoggedIn)
+
+  if (!isLoggedIn) {
+    return (
+      <div className="page-enter" style={{ minHeight: '100vh', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', padding: '0 24px', paddingBottom: '80px' }}>
+        <div style={{ width: '80px', height: '80px', borderRadius: '50%', background: 'rgba(139,170,61,0.1)', border: '1px solid rgba(139,170,61,0.15)', display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: '20px' }}>
+          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#8BAA3D" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+            <path d="M6 9H4.5a2.5 2.5 0 010-5H6" /><path d="M18 9h1.5a2.5 2.5 0 000-5H18" />
+            <path d="M4 22h16" /><path d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22" />
+            <path d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22" />
+            <path d="M18 2H6v7a6 6 0 1012 0V2Z" />
+          </svg>
+        </div>
+        <h2 style={{ fontFamily: "'Space Grotesk', sans-serif", fontSize: '20px', fontWeight: 700, color: '#1B3C2A', margin: '0 0 8px', textAlign: 'center' }}>Sign in to see the leaderboard</h2>
+        <p style={{ fontSize: '13px', color: '#7A8A6A', margin: '0 0 24px', textAlign: 'center' }}>Compete with others and climb the ranks</p>
+        <button onClick={() => navigate('/login')} style={{
+          padding: '14px 40px', borderRadius: '999px', border: 'none',
+          background: 'linear-gradient(135deg, #8BAA3D, #A0C044)', boxShadow: '0 4px 16px rgba(139,170,61,0.3)', color: 'white', fontSize: '14px', fontWeight: 600, cursor: 'pointer',
+          fontFamily: "'Space Grotesk', sans-serif",
+        }}>Sign in or create account</button>
+      </div>
+    )
+  }
 
   return (
     <div className="page-enter" style={{ minHeight: '100vh', paddingBottom: '100px' }}>
