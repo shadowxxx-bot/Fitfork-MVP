@@ -154,7 +154,7 @@ export default function HomePage() {
                   }}>{tag}</span>
                 ))}
               </div>
-              <div style={{ fontSize: '13px', fontWeight: 700, color: '#8BAA3D' }}>CHF {bowl.price.toFixed(1)}</div>
+              <div style={{ fontSize: '13px', fontWeight: 700, color: '#8BAA3D' }}>CHF {bowl.price.toFixed(2)}</div>
             </div>
           </div>
         ))}
@@ -182,7 +182,7 @@ export default function HomePage() {
                   }}>{tag}</span>
                 ))}
               </div>
-              <div style={{ fontSize: '13px', fontWeight: 700, color: '#8BAA3D' }}>CHF {bowl.price.toFixed(1)}</div>
+              <div style={{ fontSize: '13px', fontWeight: 700, color: '#8BAA3D' }}>CHF {bowl.price.toFixed(2)}</div>
             </div>
           </div>
         ))}
